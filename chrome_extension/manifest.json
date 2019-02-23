@@ -1,6 +1,7 @@
 {
     "manifest_version": 2,
     "name": "All-Forum",
+    "version": "1.0",
     "description": "The single greatest invention man ever made.",
     "author": "Justin Adkins",
     "icons": {
