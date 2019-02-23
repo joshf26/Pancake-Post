@@ -1,0 +1,2 @@
+DATABASE_NAME = 'allforum'
+DEBUG_MESSAGES = True

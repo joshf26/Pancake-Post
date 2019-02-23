@@ -1,9 +1,13 @@
 from flask import Flask, session, request, render_template, redirect, url_for
 from flask_socketio import SocketIO
 
+from database import Database
+
 app = Flask(__name__)
 app.secret_key = 'dev'
 socket = SocketIO(app)
+
+database = Database()
 
 
 @app.route('/', methods=['GET', 'POST'])
