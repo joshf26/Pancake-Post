@@ -1,0 +1,20 @@
+{
+
+  "description": "Demonstrating toolbar buttons",
+  "manifest_version": 2,
+  "name": "button-demo",
+  "version": "1.0",
+
+  // "background": {
+  //   "scripts": ["background.js"] // no need for this because we're going to handle extensions logic in popup's script
+  // },
+ 
+ "browser_action": {
+    "browser_style": true,
+    "default_popup": "popup_box/popup_box.html",
+    "default_icon": {
+      "16": "icons/page-16.png",
+      "32": "icons/page-32.png"
+    }
+  }
+}
