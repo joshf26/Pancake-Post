@@ -1,3 +1,18 @@
 * {
-    color: #546e7a;
+    color: #546e7a !important;
+}
+
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #546e7a !important;
+    box-shadow: 0 1px 0 0 #546e7a !important;
+}
+
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #546e7a !important;
+    box-shadow: 0 1px 0 0 #546e7a !important;
+}
+
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #546e7a !important;
+    box-shadow: 0 1px 0 0 #546e7a !important;
 }

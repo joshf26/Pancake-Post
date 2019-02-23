@@ -1,3 +1,21 @@
+{% macro color(type) -%}
+    {% if type == 'primary' %}
+        blue-grey darken-1
+    {% endif %}
+    {% if type == 'secondary' %}
+        teal lighten-4
+    {% endif %}
+{%- endmacro %}
+
+{% macro text_color(type) -%}
+    {% if type == 'primary' %}
+        blue-grey-text text-darken-1
+    {% endif %}
+    {% if type == 'secondary' %}
+        teal-text text-lighten-4
+    {% endif %}
+{%- endmacro %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

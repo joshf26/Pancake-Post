@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>Welcome!</h1>
-    <p>Enter a nickname to start.</p>
-    <div class="input-field">
-        <input type="text" name="nickname">
-        <label for="nickname">Nickname</label>
-    </div>
+    <h2>All Forum</h2>
+    <p>Welcome. Enter a nickname to start.</p>
+    <form action="{{ url_for('index') }}" method="POST">
+        <div class="card {{ color('secondary') }}">
+            <div class="card-content">
+                <div class="input-field">
+                    <label for="nickname">Nickname</label>
+                    <input type="text" name="nickname" id="nickname">
+                </div>
+                <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}">
+            </div>
+        </div>
+    </form>
 {% endblock %}
