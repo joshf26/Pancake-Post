@@ -15,7 +15,13 @@
             Forum goes here...
         </div>
         <div id="chat">
-            Chat goes here...
+            <div id="messages">
+
+            </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}
