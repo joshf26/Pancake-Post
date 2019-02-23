@@ -19,10 +19,12 @@ class Database:
         self.cursor.execute(f"SELECT * FROM pg_catalog.pg_database "
                             f"WHERE datname = '{DATABASE_NAME}';")
 
+        needs_tables = False
         if not self.cursor.fetchone():
             # The database does not exist, so create one now.
-            log('Creating table...')
+            log('Creating database...')
             self.cursor.execute(f"CREATE DATABASE {DATABASE_NAME}")
+            needs_tables = True
 
         # Switch to the correct table.
         self.cursor.close()
@@ -30,5 +32,10 @@ class Database:
         self.connection = psycopg2.connect(host='database', user='postgres', database=DATABASE_NAME)
         self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         self.cursor = self.connection.cursor()
+
+        # Create the tables is needed.
+        if needs_tables:
+            self.cursor.execute("CREATE TABLE users")
+            self.cursor.execute("CREATE TABLE posts")
 
         log(f'Database initialized! Name: {DATABASE_NAME}')

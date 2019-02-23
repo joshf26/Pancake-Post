@@ -1,5 +1,15 @@
 const messages_element = document.getElementById('messages');
 
+const message_input_element = document.getElementById('message-input');
+message_input_element.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        // TODO: Replace the following line with a call to the server to send the message to everyone.
+        add_message('Me', message_input_element.value);
+
+        message_input_element.value = '';
+    }
+});
+
 function add_message(from, message) {
     const message_element = document.createElement('div');
     message_element.innerHTML = '<b>' + from + '</b>: ' + message;
