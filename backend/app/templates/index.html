@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <h1>Hello World</h1>
+    <h3>Hello {{ nickname }}</h3>
+    <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Change Nickname</a>
 {% endblock %}

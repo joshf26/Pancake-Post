@@ -1,4 +1,8 @@
-* {
+.input-field label {
+    color: #546e7a !important;
+}
+
+.input-field input[type=text]:focus + label {
     color: #546e7a !important;
 }
 
@@ -15,4 +19,8 @@
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #546e7a !important;
     box-shadow: 0 1px 0 0 #546e7a !important;
+}
+
+.input-field .prefix.active {
+    color: #546e7a !important;
 }
