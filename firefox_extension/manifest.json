@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Borderify",
+  "name": "All Forums",
   "version": "1.0",
 
-  "description": "Adds a red border to all webpages matching mozilla.org.",
+  "description": "Opens iframe pointing to All Forums chat page.",
 
   "icons": {
     "48": "icons/border-48.png"
@@ -11,7 +11,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*.mozilla.org/*"],
+      "matches": ["*"],
       "js": ["test.js"]
     }
   ]

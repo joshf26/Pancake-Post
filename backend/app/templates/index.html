@@ -1,6 +1,27 @@
 {% extends "base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h3>Hello {{ nickname }}</h3>
-    <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Change Nickname</a>
+    <div id="header" class="center">
+        <h3>Hello {{ nickname }}</h3>
+        <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Change Nickname</a>
+    </div>
+
+    <div id="content">
+        <div id="forum">
+            Forum goes here...
+        </div>
+        <div id="chat">
+            <div id="messages">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 {% endblock %}
