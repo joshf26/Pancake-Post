@@ -1,0 +1,19 @@
+#header {
+    margin: 20px;
+}
+
+#content {
+    display: flex;
+}
+
+#forum {
+    flex: 0 0 60%;
+    box-sizing: border-box;
+    border: 5px solid #546e7a;
+}
+
+#chat {
+    flex: 1;
+    box-sizing: border-box;
+    border: 5px solid #546e7a;
+}
