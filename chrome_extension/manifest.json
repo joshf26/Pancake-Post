@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "name": "All-Forum",
+    "description": "The single greatest invention man ever made.",
+    "author": "Justin Adkins",
+    "icons": {
+        "16": "tab-icon.png",
+        "32": "tab-icon.png",
+        "48": "tab-icon.png"
+    },
+    "browser_action": {
+        "default_icon": "tab-icon.png",
+        "default_title": "Have a good day",
+        "default_popup": "popup.html"
+    },
+
+    "chrome_url_overrides": {
+        "newtab": "newtab.html"
+    },
+
+    "permissions": ["activeTab"]
+}
