@@ -96,7 +96,7 @@ class Database:
 
     def add_post(self, username, post_name, body, parent_id, domain):
 
-        self.cursor.execute("SELECT id FROM users where username=%s", username);
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
         user_id = self.cursor.fetchone()
 
         if user_id:
@@ -107,26 +107,26 @@ class Database:
         return False
 
     def delete_post(self, post):
-        self.cursor.execute("DELETE FROM posts WHERE id=%s", (post))
-        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post))
+        self.cursor.execute("DELETE FROM posts WHERE id=%s", (post,))
+        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post,))
 
     def add_vote(self, username, post):
-        self.cursor.execute("SELECT id FROM users where username=%s", username);
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
         user_id = self.cursor.fetchone()
 
         if user_id:
-            # TODO: We need to look up the user id by username
             self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (user_id, post))
             return True
         else:
             return False
 
     def delete_vote(self, username, post):
-        self.cursor.execute("SELECT id FROM users where username=%s", username);
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
         user_id = self.cursor.fetchone()
 
         if user_id:
-            self.cursor.execute("SELECT id from posts WHERE owner=%s AND parent=%s", (user_id, post))
+            self.cursor.execute("SELECT id from posts WHERE owner=%s AND parent=%s",
+                                (user_id, post))
             vote_id = self.cursor.fetchone()
             if vote_id:
                 self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)

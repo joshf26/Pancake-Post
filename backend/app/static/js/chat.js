@@ -1,6 +1,4 @@
-var socket = io.connect(window.location.href);
-const nickname = document.getElementById('nickname');
-
+const socket = io.connect(window.location.href);
 
 const chats_element = document.getElementById('chats');
 const chat_input_element = document.getElementById('chat-input');
@@ -13,7 +11,7 @@ socket.on('chat', function(data) {
 
 chat_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        socket.emit('chat', {msg: chat_input_element.value},);
+        socket.emit('chat', {msg: chat_input_element.value});
         chat_input_element.value = '';
     }
 });
