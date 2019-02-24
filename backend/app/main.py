@@ -27,7 +27,7 @@ def index():
         session['domain'] = request.args['domain']
 
     if 'username' in session:
-        posts = database.get_posts(DEFAULT_DOMAIN, 10, Orders.VOTES)
+        posts = database.get_posts(session.get('domain', DEFAULT_DOMAIN), 10, Orders.VOTES)
         return render_template('index.html', username=session['username'],
                                posts=posts, domain=session.get('domain', DEFAULT_DOMAIN))
 
@@ -62,18 +62,19 @@ def post():
 
     return redirect(url_for('index'))
 
+
 @socket.on('connect')
-def connectOn():
+def connect():
     join_room(session['domain'])
+
 
 @socket.on('chat')
 def text(chat):
     if 'msg' in chat and chat['msg']:
-        room = session.get('domain', DEFAULT_DOMAIN)
         socket.emit('chat', {
             'msg': escape(chat['msg']),
-            'from': escape(session['username'])},
-            room=session['domain'])
+            'from': escape(session['username'])
+        }, room=session.get('domain', DEFAULT_DOMAIN))
 
 
 if __name__ == '__main__':
