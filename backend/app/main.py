@@ -62,6 +62,9 @@ def post():
 
     return redirect(url_for('index'))
 
+@socket.on('connect')
+def connectOn():
+    join_room(session['domain'])
 
 @socket.on('chat')
 def text(chat):
@@ -69,11 +72,8 @@ def text(chat):
         room = session.get('domain', DEFAULT_DOMAIN)
         socket.emit('chat', {
             'msg': escape(chat['msg']),
-            'from': escape(session['username'])})
-        # socket.emit('chat', {
-        #     'msg': escape(chat['msg']),
-        #     'from': escape(session['username'])},
-        #     room=session['domain'])
+            'from': escape(session['username'])},
+            room=session['domain'])
 
 
 if __name__ == '__main__':
