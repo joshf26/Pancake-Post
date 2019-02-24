@@ -4,3 +4,8 @@
 {% for comment in post.comments %}
     {{ comment.text }}
 {% endfor %}
+
+<div class="input-field">
+    <label for="comment-input">Comment</label>
+    <input name="comment-input" id="comment-input" data-length="250">
+</div>
