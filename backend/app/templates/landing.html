@@ -1,23 +1,26 @@
 {% extends "base.html" %}
 
 {% block body %}
-    <div class="container">
-        <h2>Pancake Post</h2>
-        <form action="{{ url_for('index') }}" method="POST">
-            <div class="card {{ color('secondary') }}">
-                <div class="card-content">
-                    <div class="input-field">
-                        <label for="username">Username</label>
-                        <input type="text" name="username" id="username" required>
+    <div class="vertical-center">
+        <div class="container center">
+            <img src="{{ url_for('static', filename='images/pancakes.png') }}" width="150px" alt="Pancakes">
+            <h2 id="no-top-margin">Pancake Post</h2>
+            <form action="{{ url_for('index') }}" method="POST">
+                <div class="card {{ color('secondary') }}">
+                    <div class="card-content">
+                        <div class="input-field">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" id="username" required>
+                        </div>
+                        <div class="input-field">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required>
+                        </div>
+                        <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Login">
+                        <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Create Account">
                     </div>
-                    <div class="input-field">
-                        <label for="password">Password</label>
-                        <input type="password" name="password" id="password" required>
-                    </div>
-                    <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Login">
-                    <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Create Account">
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 {% endblock %}

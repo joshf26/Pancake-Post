@@ -21,7 +21,7 @@
     flex-flow: column;
     height: 100%;
     box-sizing: border-box;
-    border-left: 10px solid #546e7a;
+    border-left: 10px solid #4e342e;
 }
 
 #chats {

@@ -1,5 +1,5 @@
 from flask import Flask, escape, session, request, render_template, redirect, url_for, flash
-from flask_socketio import SocketIO, emit, join_room, leave_room
+from flask_socketio import SocketIO, join_room
 
 from conf import *
 from database import Database, Orders

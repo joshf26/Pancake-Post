@@ -2,6 +2,10 @@ html, body {
     height: 100%;
 }
 
+input {
+    border-bottom: 1px solid #4e342e !important;
+}
+
 .vertical-center {
     position: relative;
     top: 50%;
@@ -16,43 +20,47 @@ html, body {
 }
 
 .input-field label {
-    color: #546e7a !important;
+    color: #4e342e !important;
 }
 
-.input-field input[type=text]:focus + label {
-    color: #546e7a !important;
+.input-field input:focus + label {
+    color: #4e342e !important;
 }
 
-.input-field input[type=text]:focus {
-    border-bottom: 1px solid #546e7a !important;
-    box-shadow: 0 1px 0 0 #546e7a !important;
+.input-field input:focus {
+    border-bottom: 1px solid #4e342e !important;
+    box-shadow: 0 1px 0 0 #4e342e !important;
 }
 
-.input-field input[type=text].valid {
-    border-bottom: 1px solid #546e7a !important;
-    box-shadow: 0 1px 0 0 #546e7a !important;
+.input-field input.valid {
+    border-bottom: 1px solid #4e342e !important;
+    box-shadow: 0 1px 0 0 #4e342e !important;
 }
 
-.input-field input[type=text].invalid {
-    border-bottom: 1px solid #546e7a !important;
-    box-shadow: 0 1px 0 0 #546e7a !important;
+.input-field input.invalid {
+    border-bottom: 1px solid #4e342e !important;
+    box-shadow: 0 1px 0 0 #4e342e !important;
 }
 
 .input-field .prefix.active {
-    color: #546e7a !important;
+    color: #4e342e !important;
 }
 
 .input-field textarea:focus + label {
-    color: #546e7a !important;
+    color: #4e342e !important;
 }
 
 .input-field textarea:focus {
-    border-bottom: 1px solid #546e7a !important;
-    box-shadow: 0 1px 0 0 #546e7a !important
+    border-bottom: 1px solid #4e342e !important;
+    box-shadow: 0 1px 0 0 #4e342e !important
+}
+
+#no-top-margin {
+    margin-top: 0;
 }
 
 #messages {
     margin: 0;
     padding: 5px 0;
-    background-color: #546e7a !important;
+    background-color: #4e342e !important;
 }
