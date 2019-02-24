@@ -48,15 +48,8 @@ def post():
         pass
 
 
-# @socketio.on('message')
-# def handle_message(message):
-#     send(message, namespace='/chat')
-
 @socket.on('message')
 def text(message):
-    """Sent by a client when the user entered a new message.
-    The message is sent to all people in the room."""
-    # room = session.get('room')
     print(message['msg'])
     socket.emit('message', {'msg': message['msg']})
 
