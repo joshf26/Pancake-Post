@@ -4,11 +4,11 @@ const nickname = document.getElementById('nickname');
 const messages_element = document.getElementById('messages');
 const message_input_element = document.getElementById('message-input');
 
-console.log(nickname);
 
 socket.on('message', function(data) {
-  add_message(nickname, message_input_element.value);
+  add_message(nickname, data['msg']);
 });
+
 
 message_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
