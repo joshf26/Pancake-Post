@@ -57,9 +57,9 @@ class Database:
                                 ")")
             self.cursor.execute("CREATE TABLE votes("
                                 "   ID SERIAL PRIMARY KEY,"
-                                "   owner INTEGER,"
+                                "   owner INTEGER NOT NULL,"
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
-                                "   parent INTEGER,"
+                                "   post INTEGER NOT NULL,"
                                 "   FOREIGN KEY (parent) REFERENCES posts(id),"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
@@ -89,9 +89,10 @@ class Database:
 
     def delete_post(self, post_id):
         self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post_id))
+        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post_id))
+        
+    def add_vote(self, owner_id, parent_id):
+        self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (owner_id, parent_it))
 
-    def add_vote(self):
-        pass # TODO: Finish this
-
-    def delete_vote(self):
-        pass # TODO: Finish this
+    def delete_vote(self, vote_id):
+        self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
