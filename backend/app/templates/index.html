@@ -6,29 +6,54 @@
 
 {% block body %}
     <div id="page">
+        <div class="center domain-field">
+            <label for="domain-field">This should be hidden</label>
+            <input type="text" name="domain-input" id="domain-input">
+        </div>
         <div id="header" class="center">
             <h3>Hello {{ username }}</h3>
             <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
+            <a href="#new-post-modal" class="btn {{ color('primary') }} waves-effect modal-trigger">New Post</a>
         </div>
 
-        <div id="content">
-            <div id="forum">
-                <iframe src="{{ url_for('forum') }}" frameborder="0" width="100%" height="100%"></iframe>
+    <div id="content">
+        <div id="forum">
+            <iframe src="{{ url_for('forum') }}" frameborder="0" width="100%" height="100%"></iframe>
+        </div>
+        <div id="chat">
+            <div id="chats">
+                <div><b>Say Hi!</b></div>
             </div>
-            <div id="chat">
-                <div id="chats">
-                    <div><b>Messages Go</b>: Here</div>
-                </div>
-                <div class="input-field" id="chat-input-field">
-                    <label for="chat-input">Chat</label>
-                    <input type="text" name="chat-input" id="chat-input">
-                </div>
+            <div class="input-field" id="chat-input-field">
+                <label for="chat-input">Chat</label>
+                <input type="text" name="chat-input" id="chat-input">
             </div>
         </div>
+    </div>
+
+    <div id="new-post-modal" class="modal">
+        <form action="{{ url_for('post') }}" method="POST">
+            <div class="modal-content">
+                <h3>Submit a Forum Post</h3>
+                <div class="input-field">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title" required>
+                </div>
+                <div class="input-field">
+                    <textarea id="body" name="body" class="materialize-textarea"></textarea>
+                    <label for="body">Body</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="modal-close waves-effect btn-flat">Cancel</a>
+                <input type="submit" class="modal-close waves-effect btn-flat">
+            </div>
+        </form>
     </div>
 {% endblock %}
 
 {% block js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
 {% endblock %}

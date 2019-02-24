@@ -48,22 +48,28 @@ def change():
 
 @app.route('/forum')
 def forum():
-    posts = database.get_posts('allforum.com', 3, Orders.VOTES)
+    posts = database.get_posts('allforum.com', 10, Orders.VOTES)
     return render_template('forum.html', posts=posts)
 
 
 @app.route('/post', methods=['POST'])
 def post():
-    if 'title' in request.form and request.form['title'] and 'content' in request.form:
-        pass
+    if 'title' in request.form and request.form['title'] and 'body' in request.form:
+        database.add_post(session['username'], request.form['title'], request.form['body'],
+                          None, 'allforum.com')
+    else:
+        flash('Error Posting')
+
+    return redirect(url_for('index'))
 
 
 @socket.on('chat')
 def text(chat):
-    socket.emit('chat', {
-        'msg': escape(chat['msg']),
-        'from': escape(session['username'])
-    })
+    if 'msg' in chat and chat['msg']:
+        socket.emit('chat', {
+            'msg': escape(chat['msg']),
+            'from': escape(session['username'])
+        })
 
 
 if __name__ == '__main__':

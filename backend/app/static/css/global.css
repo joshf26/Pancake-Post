@@ -29,6 +29,15 @@ html, body {
     color: #546e7a !important;
 }
 
+.input-field textarea:focus + label {
+    color: #546e7a !important;
+}
+
+.input-field textarea:focus {
+    border-bottom: 1px solid #546e7a !important;
+    box-shadow: 0 1px 0 0 #546e7a !important
+}
+
 #messages {
     margin: 0;
     padding: 5px 0;
