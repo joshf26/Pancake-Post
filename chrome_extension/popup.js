@@ -5,8 +5,8 @@ chrome.tabs.query({
     let tabURL = new URL(tabs[0].url);
 
     const frame = document.createElement('iframe');
-    frame.width = '800';
-    frame.height = '600';
+    frame.width = '775';
+    frame.height = '560';
 
     frame.src = 'http://localhost?domain=' + tabURL.host;
     document.body.appendChild(frame);

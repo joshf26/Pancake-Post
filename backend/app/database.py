@@ -165,12 +165,11 @@ class Database:
 
         return False
 
-<<<<<<< HEAD
     #For adding and deleting votes for comments
     def add_vote_comments(self, username, comm):
         self.cursor.execute("SELECT id FROM users where username=%s", (username,))
         user_id = self.cursor.fetchone()
-=======
+
     def get_posts(self, domain, number, order):
         # TODO: We need to order these.
         self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
@@ -186,7 +185,7 @@ class Database:
                 'domain': post[5],
                 'created_at': post[6]
             } for post in posts]
->>>>>>> fbe624dede453891e82f50b85515cae604ae374b
+
 
         if user_id:
             self.cursor.execute("INSERT INTO commentVotes(owner, post) VALUES (%s, %s)", (user_id, comm))
@@ -249,7 +248,7 @@ class Database:
         user_id = self.cursor.fetchone()
         if user_id:
             self.cursor.execute("SELECT id FROM posts WHERE owner=%s AND domain=%s", (user_id, domain))
-            post_id = self.cursor.fetchone():
+            post_id = self.cursor.fetchone()
             if post_id:
                 self.cursor.execute("SELECT * FROM votes WHERE id=%s ORDER BY created_at DESC", (post_id))
                 comms = self.cursor.fetchall()
@@ -265,7 +264,7 @@ class Database:
         user_id = self.cursor.fetchone()
         if user_id:
             self.cursor.execute("SELECT id FROM posts WHERE owner=%s AND domain=%s", (user_id, domain))
-            post_id = self.cursor.fetchone():
+            post_id = self.cursor.fetchone()
             if post_id:
                 self.cursor.execute("SELECT * FROM commentVotes WHERE id=%s ORDER BY created_at DESC", (post_id))
                 comms = self.cursor.fetchall()
@@ -282,4 +281,3 @@ class Database:
 
         if username:
             return username[0]
-

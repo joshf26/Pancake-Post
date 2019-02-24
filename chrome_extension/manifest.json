@@ -1,8 +1,8 @@
 {
-    "name": "All-Forum",
+    "name": "Pancake Post",
     "version": "1.0",
-    "description": "The single greatest invention man ever made.",
-    "author": "Justin Adkins",
+    "description": "Chat and forum utility for any webpage.",
+    "author": "Justin Adkins, Josh Franklin, Harsh Deshpande, Tiffany Phan",
     "icons": {
         "16": "pancakes.png",
         "32": "pancakes.png",
