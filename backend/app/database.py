@@ -94,20 +94,26 @@ class Database:
 
         return False
 
-    def add_post(self, post_name, body, parent_id, user_id, domain):
-        self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
-                            "VALUES (%s, %s, %s, %s, %s)",
-                            (user_id, post_name, body, parent_id, domain))
+    def add_post(self, username, post_name, body, parent_id, domain):
+        # TODO: We need to look up the user id by username
+        # self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
+        #                     "VALUES (%s, %s, %s, %s, %s)",
+        #                     (user_id, post_name, body, parent_id, domain))
+        pass
 
-    def delete_post(self, post_id):
-        self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post_id))
-        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post_id))
-        
-    def add_vote(self, owner_id, parent_id):
-        self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (owner_id, parent_id))
+    def delete_post(self, post):
+        self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post))
+        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post))
 
-    def delete_vote(self, vote_id):
-        self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+    def add_vote(self, username, post):
+        # TODO: We need to look up the user id by username
+        # self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (username, post))
+        pass
+
+    def delete_vote(self, username, post):
+        # TODO: We need to look up the user id by username
+        # self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+        pass
 
     def get_posts(self, domain, number, order):
         # TODO: Get "number" amount of posts of domain "domain" ordered by "order".
