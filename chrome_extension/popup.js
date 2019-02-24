@@ -8,6 +8,6 @@ chrome.tabs.query({
     frame.width = '775';
     frame.height = '560';
 
-    frame.src = 'http://localhost?domain=' + tabURL.host;
+    frame.src = 'http://pancakepost.com?domain=' + tabURL.host;
     document.body.appendChild(frame);
 });
