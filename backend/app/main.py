@@ -23,8 +23,8 @@ def index():
         flash('Invalid login credentials.')
         return redirect(url_for('index'))
 
-    if 'domain' in request.form:
-        session['domain'] = request.form['domain']
+    if 'domain' in request.args:
+        session['domain'] = request.args['domain']
 
     if 'username' in session:
         posts = database.get_posts(DEFAULT_DOMAIN, 10, Orders.VOTES)
