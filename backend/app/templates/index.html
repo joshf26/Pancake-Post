@@ -5,22 +5,24 @@
 {% endblock %}
 
 {% block body %}
-    <div id="header" class="center">
-        <h3>Hello {{ username }}</h3>
-        <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
-    </div>
-
-    <div id="content">
-        <div id="forum">
-            <iframe src="{{ url_for('forum') }}" frameborder="0" width="100%" height="100%"></iframe>
+    <div id="page">
+        <div id="header" class="center">
+            <h3>Hello {{ username }}</h3>
+            <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
         </div>
-        <div id="chat">
-            <div id="chats">
-                <div><b>Messages Go</b>: Here</div>
+
+        <div id="content">
+            <div id="forum">
+                <iframe src="{{ url_for('forum') }}" frameborder="0" width="100%" height="100%"></iframe>
             </div>
-            <div class="input-field">
-                <label for="chat-input">Chat</label>
-                <input type="text" name="chat-input" id="chat-input">
+            <div id="chat">
+                <div id="chats">
+                    <div><b>Messages Go</b>: Here</div>
+                </div>
+                <div class="input-field" id="chat-input-field">
+                    <label for="chat-input">Chat</label>
+                    <input type="text" name="chat-input" id="chat-input">
+                </div>
             </div>
         </div>
     </div>

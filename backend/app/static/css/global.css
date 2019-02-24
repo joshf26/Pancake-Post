@@ -1,3 +1,7 @@
+html, body {
+    height: 100%;
+}
+
 .input-field label {
     color: #546e7a !important;
 }
@@ -25,12 +29,9 @@
     color: #546e7a !important;
 }
 
-#chats {
-    padding: 20px;
-}
-
 #messages {
     margin: 0;
     padding: 5px 0;
     background-color: #546e7a !important;
 }
+
