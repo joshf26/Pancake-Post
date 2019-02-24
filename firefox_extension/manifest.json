@@ -1,10 +1,9 @@
 {
-
-  "description": "Demonstrating toolbar buttons",
-  "manifest_version": 2,
-  "name": "button-demo",
-  "version": "1.0",
-  "author":"Tiffany Phan",
+    "name": "Pancake Post",
+    "version": "1.0",
+    "description": "Chat and forum utility for any webpage.",
+    "author": "Justin Adkins, Josh Franklin, Harsh Deshpande, Tiffany Phan",
+    "manifest_version": 2,
 
  "browser_action": {
     "default_popup": "popup_box.html",
