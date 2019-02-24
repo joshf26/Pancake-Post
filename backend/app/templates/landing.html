@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
 {% block body %}
     <div class="vertical-center">
         <div class="container center">
             <img src="{{ url_for('static', filename='images/pancakes.png') }}" width="150px" alt="Pancakes">
-            <h2 id="no-top-margin">Pancake Post</h2>
+            <h2 id="title">Pancake Post</h2>
             <form action="{{ url_for('index') }}" method="POST">
-                <div class="card {{ color('secondary') }}">
+                <div class="card {{ color('secondary') }}" id="login-form">
                     <div class="card-content">
                         <div class="input-field">
                             <label for="username">Username</label>
