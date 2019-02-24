@@ -210,7 +210,6 @@ class Database:
         self.cursor.execute("SELECT * FROM comments WHERE post=%s ORDER BY created_at DESC",
                             (post_id,))
         comments = self.cursor.fetchall()
-        log(comments)
         return {
             'id': post[0],
             'owner': post[1],

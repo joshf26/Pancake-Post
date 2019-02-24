@@ -36,6 +36,10 @@
     position: relative;
 }
 
+#comment-input-field > label {
+    position: relative;
+}
+
 #chat > .input-field {
     margin: 20px;
 }
