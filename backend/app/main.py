@@ -61,14 +61,18 @@ def post():
 
     return redirect(url_for('index'))
 
+# @socket.on('join')
+# def on_join(data):
+#     room = session.get('domain', DEFAULT_DOMAIN)
+#     join_room(room)
 
 @socket.on('chat')
 def text(chat):
     if 'msg' in chat and chat['msg']:
+        room = session.get('domain', DEFAULT_DOMAIN)
         socket.emit('chat', {
             'msg': escape(chat['msg']),
-            'from': escape(session['username'])
-        })
+            'from': escape(session['username'])})
 
 
 if __name__ == '__main__':

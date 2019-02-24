@@ -9,6 +9,5 @@ chrome.tabs.query({
     frame.height = '600';
 
     frame.src = 'http://localhost?domain=' + tabURL.host;
-
     document.body.appendChild(frame);
 });
