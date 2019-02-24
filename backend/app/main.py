@@ -30,8 +30,7 @@ def index():
 
         return redirect(url_for('index'))
 
-    if 'domain' in request.args:
-        session['domain'] = request.args['domain']
+    session['domain'] = request.args.get('domain', DEFAULT_DOMAIN)
 
     if 'username' in session:
         posts = database.get_posts(session.get('domain', DEFAULT_DOMAIN), 10, Orders.VOTES)

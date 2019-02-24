@@ -2,7 +2,7 @@ html, body {
     height: 100%;
 }
 
-input {
+input[type=text], input[type=password] {
     border-bottom: 1px solid #4e342e !important;
 }
 
