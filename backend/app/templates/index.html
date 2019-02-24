@@ -17,7 +17,7 @@
                 <div class="collection">
                     {% if posts %}
                         {% for post in posts %}
-                            <a class="collection-item">
+                            <a href="#view-post-modal" class="collection-item {{ text_color('primary') }} modal-trigger">
                                 <b>{{ post.title }}</b><br>
                                 {{ post.body }}<br>
                                 By: {{ post.owner_name }}<br>
@@ -26,12 +26,15 @@
                         {% endfor %}
                     {% else %}
                         <div class="center vertical-center {{ text_color('primary') }}">
-                            <img src="{{ url_for('static', filename='images/pancakes.png') }}" width="150px" alt="Pancakes"><br>
+                            <img src="{{ url_for('static', filename='images/pancakes.png') }}" width="150px"
+                                 alt="Pancakes"><br>
                             No Forum Posts<br>On This Website
                         </div>
                     {% endif %}
                 </div>
-                <a href="#new-post-modal" class="btn-floating btn-large waves-effect waves-light modal-trigger {{ color('secondary') }}" id="new-post-button"><i class="material-icons">add</i></a>
+                <a href="#new-post-modal"
+                   class="btn-floating btn-large waves-effect waves-light modal-trigger {{ color('secondary') }}"
+                   id="new-post-button"><i class="material-icons">add</i></a>
             </div>
             <div id="chat">
                 <div id="chats">
@@ -62,6 +65,11 @@
                     <input type="submit" class="modal-close waves-effect btn-flat">
                 </div>
             </form>
+        </div>
+
+        <div id="view-post-modal" class="modal">
+            <h4 id="view-post-text">Loading...</h4>
+            <div id="view-post-body"></div>
         </div>
     </div>
 {% endblock %}

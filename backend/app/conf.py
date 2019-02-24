@@ -1,3 +1,3 @@
-DATABASE_NAME = 'allforum'
+DATABASE_NAME = 'pancakepost'
 DEBUG_MESSAGES = True
-DEFAULT_DOMAIN = 'allforum.com'
+DEFAULT_DOMAIN = 'pancakepost.com'
