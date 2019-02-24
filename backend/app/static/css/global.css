@@ -9,6 +9,10 @@ html, body {
     transform: translate(-50%, -50%);
 }
 
+.collection {
+    margin: 0 !important;
+}
+
 .input-field label {
     color: #546e7a !important;
 }
