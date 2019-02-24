@@ -5,7 +5,7 @@ from conf import *
 from database import Database, Orders
 
 app = Flask(__name__)
-app.secret_key = 'dev'
+app.secret_key = 'dev2'
 socket = SocketIO(app)
 socket.init_app(app)
 
@@ -28,8 +28,9 @@ def index():
         # room = session['domain']
 
     if 'username' in session:
-        posts = database.get_posts('allforum.com', 10, Orders.VOTES)
-        return render_template('index.html', username=session['username'], posts=posts)
+        posts = database.get_posts(DEFAULT_DOMAIN, 10, Orders.VOTES)
+        return render_template('index.html', username=session['username'],
+                               posts=posts, domain=session.get('domain', DEFAULT_DOMAIN))
 
     return render_template('landing.html')
 

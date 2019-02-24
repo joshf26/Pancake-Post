@@ -6,29 +6,31 @@
 
 {% block body %}
     <div id="page">
-        <div id="header" class="center">
+        <nav id="header" class="center {{ color('primary') }}">
+            <span>Domain: {{ domain }}</span>
             <h3>Hello {{ username }}</h3>
-            <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
-            <a href="#new-post-modal" class="btn {{ color('primary') }} waves-effect modal-trigger">New Post</a>
-        </div>
+            <a href="{{ url_for('change') }}" class="btn {{ color('secondary') }} {{ text_color('primary') }}">Logout</a>
+            <a href="#new-post-modal" class="btn {{ color('secondary') }} {{ text_color('primary') }} waves-effect modal-trigger">New Post</a>
+        </nav>
         <div id="content">
             <div id="forum">
-                {% if posts %}
-                    {% for post in posts %}
-                        <b>{{ post.title }}</b><br>
-                        {{ post.body }}<br>
-                        By: {{ post.owner }}<br>
-                        Created: {{ post.created_at }}
-                        {% if not loop.last %}
-                            <hr>
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <div class="center vertical-center {{ text_color('primary') }}">
-                        <i class="large material-icons">brightness_4</i><br>
-                        No Forum Posts<br>On This Website
-                    </div>
-                {% endif %}
+                <div class="collection">
+                    {% if posts %}
+                        {% for post in posts %}
+                            <a class="collection-item">
+                                <b>{{ post.title }}</b><br>
+                                {{ post.body }}<br>
+                                By: {{ post.owner }}<br>
+                                Created: {{ post.created_at }}
+                            </a>
+                        {% endfor %}
+                    {% else %}
+                        <div class="center vertical-center {{ text_color('primary') }}">
+                            <i class="large material-icons">brightness_4</i><br>
+                            No Forum Posts<br>On This Website
+                        </div>
+                    {% endif %}
+                </div>
             </div>
             <div id="chat">
                 <div id="chats">
