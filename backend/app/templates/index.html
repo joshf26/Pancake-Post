@@ -15,6 +15,11 @@
         <div id="content">
             <div id="forum">
                 <div class="collection">
+                    <script>
+                        let time;
+                        let offset;
+                        let client_time;
+                    </script>
                     {% if posts %}
                         {% for post in posts %}
                             <a href="#view-post-modal" class="collection-item {{ text_color('primary') }} modal-trigger">
@@ -24,10 +29,10 @@
                                 Created: <span id="created-at-{{ loop.index }}"></span>
                             </a>
                             <script>
-                                let time = '{{ post.created_at.strftime('%x %X') }}';
-                                let offset = new Date().getTimezoneOffset();
-                                let client_time = time + offset;
-                                document.getElementById('created-at-{{ loop.index }}').value = client_time`;
+                                time = '{{ post.created_at.strftime('%x %X') }}';
+                                offset = new Date().getTimezoneOffset();
+                                client_time = time + offset;
+                                document.getElementById('created-at-{{ loop.index }}').value = client_time;
                             </script>
                         {% endfor %}
                     {% else %}
