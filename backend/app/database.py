@@ -95,7 +95,7 @@ class Database:
         return False
 
     def add_post(self, username, post_name, body, parent_id, domain):
-        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        self.cursor.execute("SELECT id FROM users where username=%s", (username,))
         user_id = self.cursor.fetchone()
 
         if user_id:
@@ -109,7 +109,7 @@ class Database:
         self.cursor.execute("DELETE FROM posts WHERE id=%s", (post,))
 
     def add_vote(self, username, post):
-        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        self.cursor.execute("SELECT id FROM users where username=%s", (username,))
         user_id = self.cursor.fetchone()
 
         if user_id:
@@ -118,7 +118,7 @@ class Database:
         return False
 
     def delete_vote(self, username, post):
-        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        self.cursor.execute("SELECT id FROM users where username=%s", (username,))
         user_id = self.cursor.fetchone()
 
         if user_id:
@@ -126,7 +126,7 @@ class Database:
                                 (user_id, post))
             vote_id = self.cursor.fetchone()
             if vote_id:
-                self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+                self.cursor.execute("DELETE FROM votes WHERE ID=%s", (vote_id,))
                 return True
 
         return False

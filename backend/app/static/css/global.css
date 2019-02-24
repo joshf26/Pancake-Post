@@ -2,6 +2,18 @@ html, body {
     height: 100%;
 }
 
+.vertical-center {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.collection {
+    margin: 0 !important;
+    z-index: -1;
+}
+
 .input-field label {
     color: #546e7a !important;
 }
