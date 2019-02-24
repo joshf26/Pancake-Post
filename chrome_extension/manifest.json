@@ -4,12 +4,12 @@
     "description": "The single greatest invention man ever made.",
     "author": "Justin Adkins",
     "icons": {
-        "16": "af.png",
-        "32": "af.png",
-        "48": "af.png"
+        "16": "pancakes.png",
+        "32": "pancakes.png",
+        "48": "pancakes.png"
     },
     "browser_action": {
-        "default_icon": "af.png",
+        "default_icon": "pancakes.png",
         "default_popup": "popup.html"
     },
 
