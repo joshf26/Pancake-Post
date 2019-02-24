@@ -16,24 +16,38 @@
             <div id="forum">
                 <div class="collection">
                     <script>
-                        let day;
-                        let date;
                         let time;
+                        let offset;
+                        let client_time;
                     </script>
                     {% if posts %}
                         {% for post in posts %}
-                            <a href="#view-post-modal" id="view-post-{{ post.id }}" class="collection-item {{ text_color('primary') }} modal-trigger">
+                            <a href="#view-post-modal" class="collection-item {{ text_color('primary') }} modal-trigger">
                                 <b>{{ post.title }}</b><br>
                                 {{ post.body }}<br>
                                 By: {{ post.owner_name }}<br>
                                 Created: <span id="created-at-{{ loop.index }}"></span>
                             </a>
                             <script>
-                                day = new Date().toLocaleDateString();
-                                date = new Date().toTimeString();
-                                time = day + ' ' + date.split(' ')[0];
-                                console.log(time);
-                                document.getElementById('created-at-{{ loop.index }}').value = time;
+                                time = '{{ post.created_at.strftime('%x %X') }}';
+                                date = time.split(' ');
+                                offset = new Date().getTimezoneOffset() * 60;
+
+                                function hmsToSecondsOnly(str) {
+                                    var p = str.split(':'),
+                                        s = 0, m = 1;
+
+                                    while (p.length > 0) {
+                                        s += m * parseInt(p.pop(), 10);
+                                        m *= 60;
+                                    }
+
+                                    return s;
+                                }
+
+                                client_time = date[0] + ' ' + new Date((hmsToSecondsOnly(date[1]) - offset) * 1000).toISOString().substr(11, 8);
+
+                                document.getElementById('created-at-{{ loop.index }}').innerText = client_time;
                             </script>
                         {% endfor %}
                     {% else %}
@@ -65,7 +79,7 @@
                     <h3>Submit a Forum Post</h3>
                     <div class="input-field">
                         <label for="title">Title</label>
-                        <input type="text" name="title" id="title" required data-length="200" maxlength="200">
+                        <input type="text" name="title" id="title" required>
                     </div>
                     <div class="input-field">
                         <textarea id="body" name="body" class="materialize-textarea"></textarea>
@@ -80,9 +94,8 @@
         </div>
 
         <div id="view-post-modal" class="modal">
-            <div class="modal-content" id="view-post-modal-content">
-
-            </div>
+            <h4 id="view-post-text">Loading...</h4>
+            <div id="view-post-body"></div>
         </div>
     </div>
 {% endblock %}
