@@ -43,6 +43,7 @@
 #forum {
     flex: 0 0 60%;
     box-sizing: border-box;
+    max-height: 100%;
 }
 
 #new-post-button {

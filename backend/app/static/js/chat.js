@@ -2,6 +2,7 @@ const socket = io.connect(window.location.href);
 
 const chats_element = document.getElementById('chats');
 const chat_input_element = document.getElementById('chat-input');
+const forum_element = document.getElementById('forum');
 
 
 socket.on('chat', function (data) {
