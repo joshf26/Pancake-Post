@@ -1,4 +1,4 @@
-from flask import Flask, session, request, render_template, redirect, url_for
+from flask import Flask, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO
 
 from database import Database
@@ -30,8 +30,8 @@ def create():
         if 'username' in request.form and request.form['username'] and \
            'password' in request.form and request.form['password']:
             database.create_user(request.form['username'], request.form['password'])
-        # session['messages'] =
-        return
+        flash('Account Created')
+        return redirect(url_for('index'))
     return render_template('create.html')
 
 

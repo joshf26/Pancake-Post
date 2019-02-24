@@ -34,8 +34,9 @@ class Database:
         self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         self.cursor = self.connection.cursor()
 
-        # Create the tables is needed.
+        # Create the tables if needed.
         if needs_tables:
+
             self.cursor.execute("CREATE TABLE users(ID SERIAL PRIMARY KEY, Username varchar(255) NOT NULL UNIQUE, Password varchar(255) NOT NULL, salt int,created_at TIMESTAMP WITH TIME ZONE MST CURRENT_TIMESTAMP")
             self.cursor.execute("CREATE TABLE posts(ID SERIAL PRIMARY KEY, FOREIGN KEY (uid) REFERENCES users(uid),Title varchar(255), Content varchar(255), FOREIGN KEY (parent) REFERENCES posts(parent)), domain varchar(255), created_at TIMESTAMP WITH TIME ZONE MST CURRENT_TIMESTAMP")
             self.cursor.execute("CREATE TABLE votes(ID SERIAL PRIMARY KEY, FOREIGN KEY (uid) REFERENCES users(uid), FOREIGN KEY (parent) REFERENCES posts(parent), created_at TIMESTAMP WITH TIME ZONE MST CURRENT_TIMESTAMP")
