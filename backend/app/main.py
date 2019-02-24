@@ -33,6 +33,7 @@ def change():
 @app.route('/post', methods=['POST'])
 def post():
     if 'title' in request.form and request.form['title'] and 'content' in request.form:
+        pass
         # post = Post(request.form['title'])
 
 
