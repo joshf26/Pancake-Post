@@ -8,7 +8,6 @@ socket.on('chat', function(data) {
   add_chat(data['from'], data['msg']);
 });
 
-
 chat_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && chat_input_element.value) {
         socket.emit('chat', {msg: chat_input_element.value});
