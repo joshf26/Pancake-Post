@@ -57,9 +57,9 @@ class Database:
                                 ")")
             self.cursor.execute("CREATE TABLE votes("
                                 "   ID SERIAL PRIMARY KEY,"
-                                "   owner INTEGER,"
+                                "   owner INTEGER NOT NULL,"
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
-                                "   parent INTEGER,"
+                                "   post INTEGER NOT NULL,"
                                 "   FOREIGN KEY (parent) REFERENCES posts(id),"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
@@ -68,14 +68,24 @@ class Database:
 
     def create_user(self, username, password):
         pw_hash, salt = generate_hash(password)
-        # TODO: We need to check that the user doesn't exist already before adding them.
+        self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
+
+        pw_information = self.cursor.fetchone()
+        if pw_information:
+            return False
+
         self.cursor.execute("INSERT INTO users(username, hash, salt) "
                             "VALUES (%s, %s, %s)", (username, pw_hash, salt))
 
+        return True
+
     def check_user(self, username, password):
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
-        pw_hash, salt = self.cursor.fetchone()
-        return check_password(password, pw_hash, salt)
+        pw_information = self.cursor.fetchone()
+        if pw_information:
+            pw_hash, salt = pw_information
+            return check_password(password, pw_hash, salt)
+        return False
 
     def add_post(self, post_name, body, parent_id, user_id, domain):
         if parent_id == -1:
@@ -86,9 +96,10 @@ class Database:
 
     def delete_post(self, post_id):
         self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post_id))
+        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post_id))
+        
+    def add_vote(self, owner_id, parent_id):
+        self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (owner_id, parent_id))
 
-    def add_vote(self):
-        pass # TODO: Finish this
-
-    def delete_vote(self):
-        pass # TODO: Finish this
+    def delete_vote(self, vote_id):
+        self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)

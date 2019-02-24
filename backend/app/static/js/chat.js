@@ -13,7 +13,7 @@ socket.on('message', function(data) {
 
 message_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        socket.emit('message', {msg: message_input_element.value});
+        socket.emit('message', {msg: message_input_element.value},);
         message_input_element.value = '';
     }
 });
