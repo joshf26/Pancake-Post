@@ -5,15 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="center domain-field">
-        <label for="domain-field">This should be hidden</label>
-        <input type="text" name="domain-input" id="domain-input">
-    </div>
-    <div id="header" class="center">
-        <h3>Hello {{ username }}</h3>
-        <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
-    </div>
     <div id="page">
+        <div class="center domain-field">
+            <label for="domain-field">This should be hidden</label>
+            <input type="text" name="domain-input" id="domain-input">
+        </div>
         <div id="header" class="center">
             <h3>Hello {{ username }}</h3>
             <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
