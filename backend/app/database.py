@@ -126,19 +126,19 @@ class Database:
         self.cursor.execute("DELETE FROM comments WHERE post=%s", (post,))
 
     # For adding and deleting comments
-    def add_comment(self, username, post_name, body):
+    def add_comment(self, username, post_id, body):
         self.cursor.execute("SELECT id FROM users where username=%s", (username,))
         user_id = self.cursor.fetchone()
 
         if user_id:
-            self.cursor.execute("INSERT INTO comments(owner, title, body) "
+            self.cursor.execute("INSERT INTO comments(owner, post, body) "
                                 "VALUES (%s, %s, %s)",
-                                (user_id, post_name, body))
+                                (user_id, post_id, body))
             return True
         return False
 
     def delete_comment(self, comm):
-        self.cursor.execute("DELETE FROM comments WHERE id=%s", (comm))
+        self.cursor.execute("DELETE FROM comments WHERE id=%s", (comm,))
 
     # For adding and deleting votes for posts
     def add_vote(self, username, post):
@@ -210,6 +210,7 @@ class Database:
         self.cursor.execute("SELECT * FROM comments WHERE post=%s ORDER BY created_at DESC",
                             (post_id,))
         comments = self.cursor.fetchall()
+        log(comments)
         return {
             'id': post[0],
             'owner': post[1],
@@ -219,11 +220,12 @@ class Database:
             'domain': post[4],
             'created_at': post[5],
             'comments': [{
-                'id': post[0],
-                'owner': post[1],
-                'body': post[2],
-                'created_at': post[3]
-            } for post in (comments if comments else [])]
+                'id': comment[0],
+                'owner': comment[1],
+                'owner_name': self.get_username_by_id(comment[1]),
+                'body': comment[3],
+                'created_at': comment[4]
+            } for comment in (comments if comments else [])]
         }
 
     # Edit this later

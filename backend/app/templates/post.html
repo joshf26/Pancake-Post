@@ -1,11 +1,16 @@
 <h4>{{ post.title }}</h4>
 {{ post.body }}
-
+<hr>
+<b>Comments:</b><br>
 {% for comment in post.comments %}
-    {{ comment.text }}
+    <b>{{ comment.owner_name }}</b>: {{ comment.body }}<br>
 {% endfor %}
-
-<div class="input-field">
-    <label for="comment-input">Comment</label>
-    <input name="comment-input" id="comment-input" data-length="250">
-</div>
+<hr>
+<form action="{{ url_for('comment') }}" method="POST">
+    <input class="hide" name="post_id" value="{{ post.id }}">
+    <div class="input-field">
+        <label for="comment-input">Comment</label>
+        <input name="body" id="comment-input" data-length="250">
+    </div>
+    <input type="submit" class="btn btn-large brown darken-3" value="Post Comment">
+</form>

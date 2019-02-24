@@ -59,6 +59,14 @@ def post():
     return redirect(url_for('index'))
 
 
+@app.route('/comment', methods=['POST'])
+def comment():
+    if 'post_id' in request.form and 'body' in request.form and request.form['body']:
+        database.add_comment(session['username'], request.form['post_id'], request.form['body'])
+
+    return redirect(url_for('index') + '?post_id=' + request.form['post_id'])
+
+
 @socket.on('connect')
 def connect():
     join_room(session['domain'])
