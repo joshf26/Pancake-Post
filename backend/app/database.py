@@ -68,8 +68,8 @@ class Database:
 
     def create_user(self, username, password):
         pw_hash, salt = generate_hash(password)
-
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
+
         pw_information = self.cursor.fetchone()
         if pw_information:
             return False
@@ -99,7 +99,7 @@ class Database:
         self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post_id))
         
     def add_vote(self, owner_id, parent_id):
-        self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (owner_id, parent_it))
+        self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (owner_id, parent_id))
 
     def delete_vote(self, vote_id):
         self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)

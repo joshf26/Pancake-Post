@@ -1,18 +1,17 @@
-const socket = io.connect('http://localhost');
-const nickname = document.getElementById('nickname');
+const socketgs = io.connect('http://localhost');
 
 const messages_element = document.getElementById('messages');
 const message_input_element = document.getElementById('message-input');
 
 
 socket.on('message', function(data) {
-  add_message(nickname, data['msg']);
+  add_message(data['from'], data['msg']);
 });
 
 
 message_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        socket.emit('message', {msg: message_input_element.value});
+        socket.emit('message', {msg: message_input_element.value},);
         message_input_element.value = '';
     }
 });
