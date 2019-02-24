@@ -48,7 +48,7 @@ def change():
 
 @app.route('/forum')
 def forum():
-    posts = database.get_posts('allforum.com', 3, Orders.VOTES)
+    posts = database.get_posts('allforum.com', 10, Orders.VOTES)
     return render_template('forum.html', posts=posts)
 
 
