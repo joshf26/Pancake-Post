@@ -19,5 +19,5 @@
         "newtab": "newtab.html"
     },
 
-    "permissions": ["activeTab"]
+    "permissions": ["activeTab", "tabs"]
 }
