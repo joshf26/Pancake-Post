@@ -128,6 +128,7 @@ class Database:
             if vote_id:
                 self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
                 return True
+
         return False
 
     def get_posts(self, domain, number, order):
@@ -144,4 +145,24 @@ class Database:
                 'domain': post[5],
                 'created_at': post[6]
             } for post in posts]
-        return 'No Posts :('
+
+        return None
+
+    def get_replies(self, username, title):
+        self.cursor.execute("SELECT id FROM users WHERE username=%s", (username,))
+        user_id = self.cursor.fetchone()
+        if user_id:
+            self.cursor.execute("SELECT id FROM posts WHERE title=%s", (title,))
+            post_id = self.cursor.fetchone()
+            if post_id:
+                self.cursor.execute("SELECT * FROM posts WHERE parent=%s", (post_id,))
+                posts = self.cursor.fetchall()
+                return [{
+                    'id': post[0],
+                    'owner': post[1],
+                    'parent': post[2],
+                    'title': post[3],
+                    'body': post[4],
+                    'domain': post[5],
+                    'created_at': post[6]
+                } for post in posts]

@@ -1,9 +1,0 @@
-{% for post in posts %}
-    <b>{{ post.title }}</b><br>
-    {{ post.body }}<br>
-    By: {{ post.owner }}<br>
-    Created: {{ post.created_at }}
-    {% if not loop.last %}
-        <hr>
-    {% endif %}
-{% endfor %}
