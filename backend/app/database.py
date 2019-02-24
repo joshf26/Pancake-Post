@@ -126,12 +126,12 @@ class Database:
         user_id = self.cursor.fetchone()
 
         if user_id:
-            # TODO: We need to look up the user id by username
-            self.cursor.execute("DELETE FROM votes WHERE id=%s", user_id)
-            return True
-        else:
-            return False
-        pass
+            self.cursor.execute("SELECT id from posts WHERE owner=%s AND parent=%s", (user_id, post))
+            vote_id = self.cursor.fetchone()
+            if vote_id:
+                self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+                return True
+        return False
 
     def get_posts(self, domain, number, order):
         # TODO: Ordered by "order".
