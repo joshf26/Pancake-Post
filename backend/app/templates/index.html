@@ -7,7 +7,7 @@
 {% block body %}
     <div id="page">
         <nav id="header" class="{{ color('primary') }}">
-            <h5 class="brand-logo">All Forum - {{ username }}</h5>
+            <h5 class="brand-logo">Pancake Post - {{ username }}</h5>
             <div class="right">
                 <a href="{{ url_for('change') }}" class="btn {{ color('secondary') }} {{ text_color('primary') }}">Logout</a>
             </div>
@@ -20,8 +20,8 @@
                             <a class="collection-item">
                                 <b>{{ post.title }}</b><br>
                                 {{ post.body }}<br>
-                                By: {{ post.owner }}<br>
-                                Created: {{ post.created_at }}
+                                By: {{ post.owner_name }}<br>
+                                Created: {{ post.created_at.strftime('%x %X') }}
                             </a>
                         {% endfor %}
                     {% else %}

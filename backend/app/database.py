@@ -41,7 +41,7 @@ class Database:
 
         # Create the tables if needed.
         if needs_tables:
-            self.cursor.execute("SET TIMEZONE TO 'GMT'")
+            self.cursor.execute("SET TIMEZONE TO 'MST'")
             self.cursor.execute("CREATE TABLE users("
                                 "   id SERIAL PRIMARY KEY,"
                                 "   username VARCHAR NOT NULL UNIQUE,"
@@ -139,6 +139,7 @@ class Database:
             return [{
                 'id': post[0],
                 'owner': post[1],
+                'owner_name': self.get_username_by_id(post[1]),
                 'parent': post[2],
                 'title': post[3],
                 'body': post[4],
@@ -166,3 +167,10 @@ class Database:
                     'domain': post[5],
                     'created_at': post[6]
                 } for post in posts]
+
+    def get_username_by_id(self, id):
+        self.cursor.execute("SELECT username FROM users where id=%s", (id,))
+        username = self.cursor.fetchone()
+
+        if username:
+            return username[0]

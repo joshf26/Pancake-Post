@@ -2,7 +2,7 @@ import logging
 
 from conf import *
 
-logging.basicConfig(level=logging.DEBUG, format='[All Forum %(asctime)s] - %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='[Pancake Post %(asctime)s] - %(message)s')
 
 
 def log(message):
