@@ -4,8 +4,8 @@ const chats_element = document.getElementById('chats');
 const chat_input_element = document.getElementById('chat-input');
 
 
-socket.on('chat', function(data) {
-  add_chat(data['from'], data['msg']);
+socket.on('chat', function (data) {
+    add_chat(data['from'], data['msg']);
 });
 
 chat_input_element.addEventListener('keydown', (event) => {
@@ -19,4 +19,5 @@ function add_chat(from, chat) {
     const chat_element = document.createElement('div');
     chat_element.innerHTML = '<b>' + from + '</b>: ' + chat;
     chats_element.appendChild(chat_element);
+    chats_element.scrollTop = chats_element.scrollHeight;
 }
