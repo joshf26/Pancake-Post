@@ -1,4 +1,4 @@
-var socket = io.connect(window.location.href);
+const socketgs = io.connect('http://localhost');
 
 const messages_element = document.getElementById('messages');
 const message_input_element = document.getElementById('message-input');
