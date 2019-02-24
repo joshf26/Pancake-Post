@@ -1,6 +1,7 @@
 from flask import Flask, escape, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
+from conf import *
 from database import Database, Orders
 
 app = Flask(__name__)
@@ -22,8 +23,12 @@ def index():
         flash('Invalid login credentials.')
         return redirect(url_for('index'))
 
+    if 'domain' in request.form:
+        session['domain'] = request.form['domain']
+
     if 'username' in session:
-        return render_template('index.html', username=session['username'])
+        posts = database.get_posts('allforum.com', 10, Orders.VOTES)
+        return render_template('index.html', username=session['username'], posts=posts)
 
     return render_template('landing.html')
 
@@ -46,17 +51,11 @@ def change():
     return redirect(url_for('index'))
 
 
-@app.route('/forum')
-def forum():
-    posts = database.get_posts('allforum.com', 10, Orders.VOTES)
-    return render_template('forum.html', posts=posts)
-
-
 @app.route('/post', methods=['POST'])
 def post():
     if 'title' in request.form and request.form['title'] and 'body' in request.form:
         database.add_post(session['username'], request.form['title'], request.form['body'],
-                          None, 'allforum.com')
+                          None, session.get('domain', DEFAULT_DOMAIN))
     else:
         flash('Error Posting')
 
