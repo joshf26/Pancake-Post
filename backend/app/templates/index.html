@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block body %}
+    <div class="center input-field">
+        <label for="chat-input">This should be hidden</label>
+        <input type="text" name="chat-input" id="chat-input">
+    </div>
     <div id="header" class="center">
         <h3>Hello {{ username }}</h3>
         <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
