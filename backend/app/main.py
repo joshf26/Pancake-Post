@@ -17,10 +17,17 @@ def index():
     if request.method == 'POST':
         if 'username' in request.form and request.form['username'] and \
                 'password' in request.form and request.form['password']:
-            if database.check_user(request.form['username'], request.form['password']):
+            if request.form.get('action', None) == 'Create Account':
+                if database.create_user(request.form['username'], request.form['password']):
+                    flash('Account Created')
+                else:
+                    flash('Username Already Exists')
+
+            elif database.check_user(request.form['username'], request.form['password']):
                 session['username'] = request.form['username']
-                return redirect(url_for('index'))
-        flash('Invalid login credentials.')
+            else:
+                flash('Invalid login credentials.')
+
         return redirect(url_for('index'))
 
     if 'domain' in request.args:
@@ -32,18 +39,6 @@ def index():
                                posts=posts, domain=session.get('domain', DEFAULT_DOMAIN))
 
     return render_template('landing.html')
-
-
-@app.route('/create', methods=['GET', 'POST'])
-def create():
-    if request.method == 'POST':
-        if 'username' in request.form and request.form['username'] and \
-                'password' in request.form and request.form['password']:
-            if database.create_user(request.form['username'], request.form['password']):
-                flash('Account Created')
-                return redirect(url_for('index'))
-            flash('Username Already Exists')
-    return render_template('create.html')
 
 
 @app.route('/change')
