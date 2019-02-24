@@ -6,11 +6,11 @@
 
 {% block body %}
     <div id="page">
-        <nav id="header" class="center {{ color('primary') }}">
-            <div id="domain-indicator">Domain: {{ domain }}</div>
-            <h3>Hello {{ username }}</h3>
-            <a href="{{ url_for('change') }}" class="btn {{ color('secondary') }} {{ text_color('primary') }}">Logout</a>
-            <a href="#new-post-modal" class="btn {{ color('secondary') }} {{ text_color('primary') }} waves-effect modal-trigger">New Post</a>
+        <nav id="header" class="{{ color('primary') }}">
+            <h5 class="brand-logo">All Forum - {{ username }}</h5>
+            <div class="right">
+                <a href="{{ url_for('change') }}" class="btn {{ color('secondary') }} {{ text_color('primary') }}">Logout</a>
+            </div>
         </nav>
         <div id="content">
             <div id="forum">
@@ -31,10 +31,11 @@
                         </div>
                     {% endif %}
                 </div>
+                <a href="#new-post-modal" class="btn-floating btn-large waves-effect waves-light modal-trigger {{ color('secondary') }}" id="new-post-button"><i class="material-icons">add</i></a>
             </div>
             <div id="chat">
                 <div id="chats">
-                    <div><b>Say Hi!</b></div>
+                    <div><b>You are connected to</b> {{ domain }}.</div>
                 </div>
                 <div class="input-field" id="chat-input-field">
                     <label for="chat-input">Chat</label>

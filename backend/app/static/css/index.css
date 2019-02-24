@@ -5,7 +5,7 @@
 }
 
 #header {
-    padding: 20px;
+    padding: 0 20px;
     flex: 0 1 auto;
     height: auto;
 }
@@ -42,4 +42,10 @@
 #forum {
     flex: 0 0 60%;
     box-sizing: border-box;
+}
+
+#new-post-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
 }
