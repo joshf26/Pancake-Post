@@ -61,7 +61,7 @@ class Database:
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
             self.cursor.execute("CREATE TABLE votes("
-                                "   ID SERIAL PRIMARY KEY,"
+                                "   id SERIAL PRIMARY KEY,"
                                 "   owner INTEGER NOT NULL,"
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
                                 "   post INTEGER NOT NULL,"
@@ -95,27 +95,56 @@ class Database:
         return False
 
     def add_post(self, username, post_name, body, parent_id, domain):
-        # TODO: We need to look up the user id by username
-        # self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
-        #                     "VALUES (%s, %s, %s, %s, %s)",
-        #                     (user_id, post_name, body, parent_id, domain))
-        pass
+
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        user_id = self.cursor.fetchone()
+
+        if user_id:
+            self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
+                                "VALUES (%s, %s, %s, %s, %s)",
+                                (user_id, post_name, body, parent_id, domain))
+            return True
+        return False
 
     def delete_post(self, post):
-        self.cursor.execute("DELETE FROM posts WHERE id=%s", (post))
-        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post))
+        self.cursor.execute("DELETE FROM posts WHERE id=%s", (post,))
+        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post,))
 
     def add_vote(self, username, post):
-        # TODO: We need to look up the user id by username
-        # self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (username, post))
-        pass
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        user_id = self.cursor.fetchone()
+
+        if user_id:
+            self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (user_id, post))
+            return True
+        else:
+            return False
 
     def delete_vote(self, username, post):
-        # TODO: We need to look up the user id by username
-        # self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
-        pass
+        self.cursor.execute("SELECT id FROM users where username=%s", username)
+        user_id = self.cursor.fetchone()
+
+        if user_id:
+            self.cursor.execute("SELECT id from posts WHERE owner=%s AND parent=%s",
+                                (user_id, post))
+            vote_id = self.cursor.fetchone()
+            if vote_id:
+                self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+                return True
+        return False
 
     def get_posts(self, domain, number, order):
         # TODO: Ordered by "order".
-        self.cursor.execute("SELECT * FROM posts WHERE domain=%S LIMIT " + number, (domain,))
-        pass
+        self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
+        posts = self.cursor.fetchall()
+        if posts:
+            return [{
+                'id': post[0],
+                'owner': post[1],
+                'parent': post[2],
+                'title': post[3],
+                'body': post[4],
+                'domain': post[5],
+                'created_at': post[6]
+            } for post in posts]
+        return 'No Posts :('
