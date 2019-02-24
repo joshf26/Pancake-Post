@@ -117,5 +117,8 @@ class Database:
 
     def get_posts(self, domain, number, order):
         # TODO: Ordered by "order".
-        self.cursor.execute("SELECT * FROM posts WHERE domain=%S LIMIT " + number, (domain,))
-        pass
+        self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
+        posts = self.cursor.fetchall()
+        if posts:
+            return posts
+        return 'No Posts :('

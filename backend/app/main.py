@@ -1,7 +1,7 @@
 from flask import Flask, escape, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
-from database import Database
+from database import Database, Orders
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -23,7 +23,7 @@ def index():
         return redirect(url_for('index'))
 
     if 'username' in session:
-        return render_template('index.html', username=session['username'], domain='allforum.com')
+        return render_template('index.html', username=session['username'])
 
     return render_template('landing.html')
 
@@ -44,6 +44,12 @@ def create():
 def change():
     session.pop('username')
     return redirect(url_for('index'))
+
+
+@app.route('/forum')
+def forum():
+    posts = database.get_posts('allforum.com', 3, Orders.VOTES)
+    return render_template('forum.html', posts=posts)
 
 
 @app.route('/post', methods=['POST'])
