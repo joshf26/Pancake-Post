@@ -74,8 +74,11 @@ class Database:
 
     def check_user(self, username, password):
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
-        pw_hash, salt = self.cursor.fetchone()
-        return check_password(password, pw_hash, salt)
+        pw_information = self.cursor.fetchone()
+        if pw_information:
+            pw_hash, salt = pw_information
+            return check_password(password, pw_hash, salt)
+        return False
 
     def add_post(self, post_name, body, parent_id, user_id, domain):
         if parent_id == -1:
