@@ -12,6 +12,7 @@ html, body {
 .collection {
     margin: 0 !important;
     z-index: -1;
+    height: 100%;
 }
 
 .input-field label {
@@ -54,5 +55,11 @@ html, body {
     margin: 0;
     padding: 5px 0;
     background-color: #546e7a !important;
+}
+
+#domain-indicator {
+    position: absolute;
+    top: 0;
+    right: 25px;
 }
 
