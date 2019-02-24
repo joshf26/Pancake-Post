@@ -99,7 +99,7 @@ class Database:
         user_id = self.cursor.fetchone()
 
         if user_id:
-            self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
+            self.cursor.execute("INSERT INTO posts(owner, title, body, parent, domain) "
                                 "VALUES (%s, %s, %s, %s, %s)",
                                 (user_id, post_name, body, parent_id, domain))
             return True
