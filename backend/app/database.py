@@ -44,9 +44,9 @@ class Database:
             self.cursor.execute("SET TIMEZONE TO 'GMT'")
             self.cursor.execute("CREATE TABLE users("
                                 "   id SERIAL PRIMARY KEY,"
-                                "   username VARCHAR(255) NOT NULL UNIQUE,"
-                                "   hash VARCHAR(255) NOT NULL,"
-                                "   salt VARCHAR(255),"
+                                "   username VARCHAR NOT NULL UNIQUE,"
+                                "   hash VARCHAR NOT NULL,"
+                                "   salt VARCHAR,"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
             self.cursor.execute("CREATE TABLE posts("
@@ -55,9 +55,9 @@ class Database:
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
                                 "   parent INTEGER,"
                                 "   FOREIGN KEY (parent) REFERENCES posts(id),"
-                                "   title VARCHAR(255),"
-                                "   body VARCHAR(255),"
-                                "   domain VARCHAR(255),"
+                                "   title VARCHAR,"
+                                "   body VARCHAR,"
+                                "   domain VARCHAR,"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
             self.cursor.execute("CREATE TABLE votes("
@@ -65,7 +65,7 @@ class Database:
                                 "   owner INTEGER NOT NULL,"
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
                                 "   post INTEGER NOT NULL,"
-                                "   FOREIGN KEY (parent) REFERENCES posts(id),"
+                                "   FOREIGN KEY (post) REFERENCES posts(id),"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
 
