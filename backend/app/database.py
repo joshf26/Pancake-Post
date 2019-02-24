@@ -95,18 +95,16 @@ class Database:
         return False
 
     def add_post(self, username, post_name, body, parent_id, domain):
-        
+
         self.cursor.execute("SELECT id FROM users where username=%s", username);
         user_id = self.cursor.fetchone()
-        
+
         if user_id:
             self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
-                           "VALUES (%s, %s, %s, %s, %s)",
-                           (user_id, post_name, body, parent_id, domain))
-             return True
-         else:
-             return False
-       
+                                "VALUES (%s, %s, %s, %s, %s)",
+                                (user_id, post_name, body, parent_id, domain))
+            return True
+        return False
 
     def delete_post(self, post):
         self.cursor.execute("DELETE FROM posts WHERE id=%s", (post))
@@ -115,22 +113,21 @@ class Database:
     def add_vote(self, username, post):
         self.cursor.execute("SELECT id FROM users where username=%s", username);
         user_id = self.cursor.fetchone()
-        
+
         if user_id:
-        # TODO: We need to look up the user id by username
+            # TODO: We need to look up the user id by username
             self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (user_id, post))
             return True
         else:
             return False
-        
 
     def delete_vote(self, username, post):
         self.cursor.execute("SELECT id FROM users where username=%s", username);
         user_id = self.cursor.fetchone()
-        
+
         if user_id:
-        # TODO: We need to look up the user id by username
-            self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+            # TODO: We need to look up the user id by username
+            self.cursor.execute("DELETE FROM votes WHERE id=%s", user_id)
             return True
         else:
             return False
@@ -141,5 +138,13 @@ class Database:
         self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
         posts = self.cursor.fetchall()
         if posts:
-            return posts
+            return [{
+                'id': post[0],
+                'owner': post[1],
+                'parent': post[2],
+                'title': post[3],
+                'body': post[4],
+                'domain': post[5],
+                'created_at': post[6]
+            } for post in posts]
         return 'No Posts :('
