@@ -38,7 +38,7 @@
                 </div>
                 <div class="input-field" id="chat-input-field">
                     <label for="chat-input">Chat</label>
-                    <input type="text" name="chat-input" id="chat-input">
+                    <input name="chat-input" id="chat-input" data-length="120">
                 </div>
             </div>
         </div>
@@ -69,4 +69,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
     <script src="{{ url_for('static', filename='js/modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/counter.js') }}"></script>
 {% endblock %}

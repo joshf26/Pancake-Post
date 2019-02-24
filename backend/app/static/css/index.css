@@ -31,8 +31,9 @@
     max-height: 100%;
 }
 
-#chat-input-field {
+#chat-input-field > label {
     flex: 0 1 auto;
+    position: relative;
 }
 
 #chat > .input-field {
