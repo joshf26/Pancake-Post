@@ -4,7 +4,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from conf import *
 from helper import log
-from auth import generate_hash
+from auth import generate_hash, check_password
 
 
 class Database:
@@ -39,9 +39,9 @@ class Database:
             self.cursor.execute("SET TIMEZONE TO 'GMT'")
             self.cursor.execute("CREATE TABLE users("
                                 "   id SERIAL PRIMARY KEY,"
-                                "   username varchar(255) NOT NULL UNIQUE,"
-                                "   hash varchar(255) NOT NULL,"
-                                "   salt int,"
+                                "   username VARCHAR(255) NOT NULL UNIQUE,"
+                                "   hash VARCHAR(255) NOT NULL,"
+                                "   salt VARCHAR(255),"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
             self.cursor.execute("CREATE TABLE posts("
@@ -50,9 +50,9 @@ class Database:
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
                                 "   parent INTEGER,"
                                 "   FOREIGN KEY (parent) REFERENCES posts(id),"
-                                "   title varchar(255),"
-                                "   body varchar(255),"
-                                "   domain varchar(255),"
+                                "   title VARCHAR(255),"
+                                "   body VARCHAR(255),"
+                                "   domain VARCHAR(255),"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
             self.cursor.execute("CREATE TABLE votes("
@@ -75,7 +75,7 @@ class Database:
     def check_user(self, username, password):
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
         pw_hash, salt = self.cursor.fetchone()
-        # TODO: Finish this
+        return check_password(password, pw_hash, salt)
 
     def add_post(self, post_name, body, parent_id, user_id, domain):
         if parent_id == -1:

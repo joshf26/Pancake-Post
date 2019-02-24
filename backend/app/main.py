@@ -14,8 +14,12 @@ database = Database()
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
-        if 'username' in request.form and request.form['username']:
-            session['username'] = request.form['username']
+        if 'username' in request.form and request.form['username'] and \
+                'password' in request.form and request.form['password']:
+            if database.check_user(request.form['username'], request.form['password']):
+                session['username'] = request.form['username']
+                return redirect(url_for('index'))
+        flash('Invalid login credentials.')
         return redirect(url_for('index'))
 
     if 'username' in session:
@@ -29,8 +33,7 @@ def create():
     if request.method == 'POST':
         if 'username' in request.form and request.form['username'] and \
                 'password' in request.form and request.form['password']:
-            #database.create_user(request.form['username'], request.form['password'])
-            pass
+            database.create_user(request.form['username'], request.form['password'])
         flash('Account Created')
         return redirect(url_for('index'))
     return render_template('create.html')
