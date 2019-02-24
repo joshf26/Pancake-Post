@@ -1,4 +1,4 @@
-var socket = io.connect('http://localhost');
+const socket = io.connect('http://localhost');
 const nickname = document.getElementById('nickname');
 
 const messages_element = document.getElementById('messages');

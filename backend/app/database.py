@@ -68,9 +68,16 @@ class Database:
 
     def create_user(self, username, password):
         pw_hash, salt = generate_hash(password)
-        # TODO: We need to check that the user doesn't exist already before adding them.
+
+        self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
+        pw_information = self.cursor.fetchone()
+        if pw_information:
+            return False
+
         self.cursor.execute("INSERT INTO users(username, hash, salt) "
                             "VALUES (%s, %s, %s)", (username, pw_hash, salt))
+
+        return True
 
     def check_user(self, username, password):
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))

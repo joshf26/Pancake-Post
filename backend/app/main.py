@@ -33,9 +33,10 @@ def create():
     if request.method == 'POST':
         if 'username' in request.form and request.form['username'] and \
                 'password' in request.form and request.form['password']:
-            database.create_user(request.form['username'], request.form['password'])
-        flash('Account Created')
-        return redirect(url_for('index'))
+            if database.create_user(request.form['username'], request.form['password']):
+                flash('Account Created')
+                return redirect(url_for('index'))
+            flash('Username Already Exists')
     return render_template('create.html')
 
 
