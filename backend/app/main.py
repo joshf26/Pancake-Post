@@ -50,9 +50,7 @@ def change():
 def post():
     if 'title' in request.form and request.form['title'] and 'body' in request.form:
         database.add_post(session['username'], request.form['title'], request.form['body'],
-                          None, session.get('domain', DEFAULT_DOMAIN))
-    else:
-        flash('Error Posting')
+                          session.get('domain', DEFAULT_DOMAIN))
 
     return redirect(url_for('index'))
 
