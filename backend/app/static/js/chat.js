@@ -2,6 +2,7 @@
 
 var socket = io.connect('http://localhost');
 const nickname = document.getElementById('nickname');
+
 console.log(nickname);
 socket.on('connect', () => {
 	console.log("connected");
@@ -12,7 +13,6 @@ socket.on('message', function(data) {
 });
 
 const messages_element = document.getElementById('messages');
-
 const message_input_element = document.getElementById('message-input');
 message_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {

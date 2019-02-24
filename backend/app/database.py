@@ -4,6 +4,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from conf import *
 from helper import log
+from auth import generate_hash
 
 
 class Database:
@@ -33,9 +34,50 @@ class Database:
         self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         self.cursor = self.connection.cursor()
 
-        # Create the tables is needed.
+        # Create the tables if needed.
         if needs_tables:
-            self.cursor.execute("CREATE TABLE users")
-            self.cursor.execute("CREATE TABLE posts")
+            self.cursor.execute("SET TIMEZONE TO 'GMT'")
+            self.cursor.execute("CREATE TABLE users("
+                                "   id SERIAL PRIMARY KEY,"
+                                "   username varchar(255) NOT NULL UNIQUE,"
+                                "   hash varchar(255) NOT NULL,"
+                                "   salt int,"
+                                "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
+                                ")")
+            self.cursor.execute("CREATE TABLE posts("
+                                "   id SERIAL PRIMARY KEY,"
+                                "   owner INTEGER NOT NULL,"
+                                "   FOREIGN KEY (owner) REFERENCES users(id),"
+                                "   parent INTEGER,"
+                                "   FOREIGN KEY (parent) REFERENCES posts(id),"
+                                "   title varchar(255),"
+                                "   body varchar(255),"
+                                "   domain varchar(255),"
+                                "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
+                                ")")
+            self.cursor.execute("CREATE TABLE votes("
+                                "   ID SERIAL PRIMARY KEY,"
+                                "   owner INTEGER,"
+                                "   FOREIGN KEY (owner) REFERENCES users(id),"
+                                "   parent INTEGER,"
+                                "   FOREIGN KEY (parent) REFERENCES posts(id),"
+                                "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
+                                ")")
 
         log(f'Database initialized! Name: {DATABASE_NAME}')
+
+    def create_user(self, username, password):
+        pw_hash, salt = generate_hash(password)
+        self.cursor.execute("INSERT INTO users(username, hash, salt) "
+                            "VALUES (%s, %s, %s)", (username, pw_hash, salt))
+
+    def add_comment(self, post_name, body, parent_id, user_id, domain):
+        if parent_id == -1:
+            parent_id = None
+        self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
+                            "VALUES (%s, %s, %s, %s, %s)",
+                            (user_id, post_name, body, parent_id, domain))
+
+    def delete_comment(self, post_id):
+        self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post_id))
+
