@@ -53,7 +53,7 @@ input {
 .input-field textarea:focus {
     border-bottom: 1px solid #4e342e !important;
     box-shadow: 0 1px 0 0 #4e342e !important
-}g
+}
 
 #messages {
     margin: 0;
