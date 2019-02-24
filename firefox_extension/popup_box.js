@@ -20,5 +20,5 @@ frame.width = '775';
 frame.height = '560';
 
 console.log(querying);
-frame.src = 'http://localhost?domain=' + querying.url;
+frame.src = 'http://pancakepost.com?domain=' + querying.url;
 document.body.appendChild(frame);
