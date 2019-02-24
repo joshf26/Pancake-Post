@@ -1,7 +1,7 @@
 from flask import Flask, escape, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
-from database import Database
+from database import Database, Orders
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -46,17 +46,24 @@ def change():
     return redirect(url_for('index'))
 
 
+@app.route('/forum')
+def forum():
+    posts = database.get_posts('allforum.com', 3, Orders.VOTES)
+    return render_template('forum.html', posts=posts)
+
+
 @app.route('/post', methods=['POST'])
 def post():
     if 'title' in request.form and request.form['title'] and 'content' in request.form:
         pass
 
 
-@socket.on('message')
-def text(message):
-    socket.emit('message', {'msg': escape(message['msg']),
+@socket.on('chat')
+def text(chat):
+    socket.emit('chat', {
+                            'msg': escape(chat['msg']),
                             'from': escape(session['username'])
-                            })
+                        })
 
 
 if __name__ == '__main__':

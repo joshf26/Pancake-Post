@@ -109,7 +109,7 @@ class Database:
        
 
     def delete_post(self, post):
-        self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post))
+        self.cursor.execute("DELETE FROM posts WHERE id=%s", (post))
         self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post))
 
     def add_vote(self, username, post):
@@ -137,5 +137,9 @@ class Database:
         pass
 
     def get_posts(self, domain, number, order):
-        # TODO: Get "number" amount of posts of domain "domain" ordered by "order".
-        pass
+        # TODO: Ordered by "order".
+        self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
+        posts = self.cursor.fetchall()
+        if posts:
+            return posts
+        return 'No Posts :('
