@@ -23,7 +23,7 @@ def index():
                 else:
                     flash('Username Already Exists')
 
-            elif database.check_user(request.form['username'], request.form['password']):
+            if database.check_user(request.form['username'], request.form['password']):
                 session['username'] = request.form['username']
             else:
                 flash('Invalid login credentials.')
@@ -56,7 +56,7 @@ def post():
     elif 'post_id' in request.args:
         return render_template('post.html', post=database.get_post_details(request.args['post_id']))
 
-    return redirect(url_for('index'))
+    return redirect(url_for('index') + '?domain=' + session.get('domain', DEFAULT_DOMAIN))
 
 
 @app.route('/comment', methods=['POST'])
