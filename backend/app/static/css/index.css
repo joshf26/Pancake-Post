@@ -20,16 +20,15 @@
     display: flex;
     flex-flow: column;
     height: 100%;
+    box-sizing: border-box;
+    border-left: 10px solid #546e7a;
 }
 
 #chats {
     padding: 20px;
     flex: 1 1 auto;
-}
-
-#chat {
-    box-sizing: border-box;
-    border-left: 10px solid #546e7a;
+    overflow: scroll;
+    max-height: 100%;
 }
 
 #chat-input-field {
