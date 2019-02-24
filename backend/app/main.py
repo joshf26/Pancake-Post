@@ -23,7 +23,7 @@ def index():
         return redirect(url_for('index'))
 
     if 'username' in session:
-        return render_template('index.html', username=session['username'])
+        return render_template('index.html', username=session['username'], domain='allforum.com')
 
     return render_template('landing.html')
 
@@ -52,11 +52,12 @@ def post():
         pass
 
 
-@socket.on('message')
-def text(message):
-    socket.emit('message', {'msg': escape(message['msg']),
+@socket.on('chat')
+def text(chat):
+    socket.emit('chat', {
+                            'msg': escape(chat['msg']),
                             'from': escape(session['username'])
-                            })
+                        })
 
 
 if __name__ == '__main__':

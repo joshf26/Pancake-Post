@@ -2,24 +2,24 @@ var socket = io.connect(window.location.href);
 const nickname = document.getElementById('nickname');
 
 
-const messages_element = document.getElementById('messages');
-const message_input_element = document.getElementById('message-input');
+const chats_element = document.getElementById('chats');
+const chat_input_element = document.getElementById('chat-input');
 
 
-socket.on('message', function(data) {
-  add_message(data['from'], data['msg']);
+socket.on('chat', function(data) {
+  add_chat(data['from'], data['msg']);
 });
 
 
-message_input_element.addEventListener('keydown', (event) => {
+chat_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
-        socket.emit('message', {msg: message_input_element.value},);
-        message_input_element.value = '';
+        socket.emit('chat', {msg: chat_input_element.value},);
+        chat_input_element.value = '';
     }
 });
 
-function add_message(from, message) {
-    const message_element = document.createElement('div');
-    message_element.innerHTML = '<b>' + from + '</b>: ' + message;
-    messages_element.appendChild(message_element);
+function add_chat(from, chat) {
+    const chat_element = document.createElement('div');
+    chat_element.innerHTML = '<b>' + from + '</b>: ' + chat;
+    chats_element.appendChild(chat_element);
 }
