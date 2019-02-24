@@ -41,7 +41,7 @@ class Database:
 
         # Create the tables if needed.
         if needs_tables:
-            self.cursor.execute("SET TIMEZONE TO 'MST'")
+            self.cursor.execute("SET TIMEZONE TO 'GMT'")
             self.cursor.execute("CREATE TABLE users("
                                 "   id SERIAL PRIMARY KEY,"
                                 "   username VARCHAR NOT NULL UNIQUE,"
