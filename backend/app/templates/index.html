@@ -16,9 +16,9 @@
             <div id="forum">
                 <div class="collection">
                     <script>
+                        let day;
+                        let date;
                         let time;
-                        let offset;
-                        let client_time;
                     </script>
                     {% if posts %}
                         {% for post in posts %}
@@ -29,10 +29,11 @@
                                 Created: <span id="created-at-{{ loop.index }}"></span>
                             </a>
                             <script>
-                                time = '{{ post.created_at.strftime('%x %X') }}';
-                                offset = new Date().getTimezoneOffset();
-                                client_time = time + offset;
-                                document.getElementById('created-at-{{ loop.index }}').value = client_time;
+                                day = new Date().toLocaleDateString();
+                                date = new Date().toTimeString();
+                                time = day + ' ' + date.split(' ')[0];
+                                console.log(time);
+                                document.getElementById('created-at-{{ loop.index }}').value = time;
                             </script>
                         {% endfor %}
                     {% else %}
