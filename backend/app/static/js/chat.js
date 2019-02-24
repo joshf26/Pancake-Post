@@ -10,7 +10,7 @@ socket.on('chat', function (data) {
 
 chat_input_element.addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && chat_input_element.value) {
-        socket.emit('chat', {msg: chat_input_element.value});
+        socket.emit('chat', {msg: chat_input_element.value.substring(0, 120)});
         chat_input_element.value = '';
     }
 });
