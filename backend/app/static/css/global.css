@@ -16,6 +16,7 @@ input[type=text], input[type=password] {
 .collection {
     margin: 0 !important;
     height: 100%;
+    overflow: scroll;
 }
 
 .input-field label {
