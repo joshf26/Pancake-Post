@@ -5,25 +5,14 @@
 {% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
     <div class="center input-field">
         <label for="chat-input">This should be hidden</label>
         <input type="text" name="chat-input" id="chat-input">
     </div>
-    <div id="header" class="center">
-        <h3>Hello {{ username }}</h3>
-        <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
-    </div>
-
-    <div id="content">
-        <div id="forum">
-            <iframe src="{{ url_for('forum') }}" frameborder="0" width="100%" height="100%"></iframe>
-=======
     <div id="page">
         <div id="header" class="center">
             <h3>Hello {{ username }}</h3>
             <a href="{{ url_for('change') }}" class="btn {{ color('primary') }}">Logout</a>
->>>>>>> c2eb6140c2642665706afb6c95d474ad1863ea2e
         </div>
 
         <div id="content">
