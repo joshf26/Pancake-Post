@@ -14,8 +14,8 @@
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" required>
                     </div>
-                    <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" value="Login">
-                    <a href="{{ url_for('create') }}" class="btn {{ color('primary') }} {{ text_color('secondary') }}">Create Account</a>
+                    <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Login">
+                    <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Create Account">
                 </div>
             </div>
         </form>
