@@ -14,11 +14,11 @@
                     <div class="card-content">
                         <div class="input-field">
                             <label for="username">Username</label>
-                            <input type="text" name="username" id="username" required>
+                            <input type="text" name="username" id="username" required data-length="25" maxlength="25">
                         </div>
                         <div class="input-field">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" required>
+                            <input type="password" name="password" id="password" required data-length="100" maxlength="100">
                         </div>
                         <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Login">
                         <input type="submit" class="btn {{ color('primary') }} {{ text_color('secondary') }}" name="action" value="Create Account">
