@@ -95,7 +95,6 @@ class Database:
         return False
 
     def add_post(self, username, post_name, body, parent_id, domain):
-
         self.cursor.execute("SELECT id FROM users where username=%s", username)
         user_id = self.cursor.fetchone()
 
@@ -108,7 +107,6 @@ class Database:
 
     def delete_post(self, post):
         self.cursor.execute("DELETE FROM posts WHERE id=%s", (post,))
-        self.cursor.execute("DELETE FROM votes WHERE parent=%s", (post,))
 
     def add_vote(self, username, post):
         self.cursor.execute("SELECT id FROM users where username=%s", username)
@@ -117,8 +115,7 @@ class Database:
         if user_id:
             self.cursor.execute("INSERT INTO votes(owner, post) VALUES (%s, %s)", (user_id, post))
             return True
-        else:
-            return False
+        return False
 
     def delete_vote(self, username, post):
         self.cursor.execute("SELECT id FROM users where username=%s", username)
@@ -134,7 +131,7 @@ class Database:
         return False
 
     def get_posts(self, domain, number, order):
-        # TODO: Ordered by "order".
+        # TODO: We need to order these.
         self.cursor.execute("SELECT * FROM posts WHERE domain=%s LIMIT " + str(number), (domain,))
         posts = self.cursor.fetchall()
         if posts:

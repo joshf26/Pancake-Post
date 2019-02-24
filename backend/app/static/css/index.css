@@ -1,23 +1,46 @@
+#page {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
 #header {
     margin: 20px;
+    flex: 0 1 auto;
 }
 
 #content {
+    flex: 1 1 auto;
     display: flex;
+}
+
+#chat {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+}
+
+#chats {
+    padding: 20px;
+    flex: 1 1 auto;
+}
+
+#chat {
+    box-sizing: border-box;
+    border: 5px solid #546e7a;
+}
+
+#chat-input-field {
+    flex: 0 1 auto;
+}
+
+#chat > .input-field {
+    margin: 20px;
 }
 
 #forum {
     flex: 0 0 60%;
     box-sizing: border-box;
     border: 5px solid #546e7a;
-}
-
-#chat {
-    flex: 1;
-    box-sizing: border-box;
-    border: 5px solid #546e7a;
-}
-
-#chat > .input-field {
-    margin: 20px;
 }
