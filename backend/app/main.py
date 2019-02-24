@@ -67,7 +67,7 @@ def connect():
 def text(chat):
     if 'msg' in chat and chat['msg']:
         socket.emit('chat', {
-            'msg': escape(chat['msg']),
+            'msg': escape(chat['msg'])[:120],
             'from': escape(session['username'])
         }, room=session.get('domain', DEFAULT_DOMAIN))
 
