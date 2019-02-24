@@ -62,8 +62,8 @@ class Database:
                                 "   id SERIAL PRIMARY KEY,"
                                 "   owner INTEGER NOT NULL,"
                                 "   FOREIGN KEY (owner) REFERENCES users(id),"
-                                "   parent INTEGER,"
-                                "   FOREIGN KEY (parent) REFERENCES posts(id),"
+                                "   post INTEGER,"
+                                "   FOREIGN KEY (post) REFERENCES posts(id),"
                                 "   body VARCHAR,"
                                 "   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP"
                                 ")")
@@ -123,7 +123,7 @@ class Database:
 
     def delete_post(self, post):
         self.cursor.execute("DELETE FROM posts WHERE id=%s", (post,))
-        self.cursor.execute("DELETE FROM comments WHERE parent=%s", (post,))
+        self.cursor.execute("DELETE FROM comments WHERE post=%s", (post,))
 
     # For adding and deleting comments
     def add_comment(self, username, post_name, body):
@@ -204,6 +204,28 @@ class Database:
 
         return None
 
+    def get_post_details(self, post_id):
+        self.cursor.execute("SELECT * FROM posts WHERE id=%s", (post_id,))
+        post = self.cursor.fetchone()
+        self.cursor.execute("SELECT * FROM comments WHERE post=%s ORDER BY created_at DESC",
+                            (post_id,))
+        comments = self.cursor.fetchall()
+        return {
+            'id': post[0],
+            'owner': post[1],
+            'owner_name': self.get_username_by_id(post[1]),
+            'title': post[2],
+            'body': post[3],
+            'domain': post[4],
+            'created_at': post[5],
+            'comments': [{
+                'id': post[0],
+                'owner': post[1],
+                'body': post[2],
+                'created_at': post[3]
+            } for post in (comments if comments else [])]
+        }
+
     # Edit this later
     def get_posts_from_user(self, domain, number, username):
         self.cursor.execute("SELECT id FROM users WHERE username=%s", (username,))
@@ -224,7 +246,7 @@ class Database:
 
         return None
 
-    def get_comments(self, username, domain):
+    def get_comments_of_user(self, username, domain):
         self.cursor.execute("SELECT id FROM users WHERE username=%s", (username, ))
         user_id = self.cursor.fetchone()
         if user_id:

@@ -46,11 +46,15 @@ def change():
     return redirect(url_for('index'))
 
 
-@app.route('/post', methods=['POST'])
+@app.route('/post', methods=['GET', 'POST'])
 def post():
-    if 'title' in request.form and request.form['title'] and 'body' in request.form:
-        database.add_post(session['username'], request.form['title'], request.form['body'],
-                          session.get('domain', DEFAULT_DOMAIN))
+    if request.method == 'POST':
+        if 'title' in request.form and request.form['title'] and 'body' in request.form:
+            database.add_post(session['username'], request.form['title'], request.form['body'],
+                              session.get('domain', DEFAULT_DOMAIN))
+
+    elif 'post_id' in request.args:
+        return render_template('post.html', post=database.get_post_details(request.args['post_id']))
 
     return redirect(url_for('index'))
 

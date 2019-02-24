@@ -22,7 +22,7 @@
                     </script>
                     {% if posts %}
                         {% for post in posts %}
-                            <a href="#view-post-modal" class="collection-item {{ text_color('primary') }} modal-trigger">
+                            <a href="#view-post-modal" id="view-post-{{ post.id }}" class="collection-item {{ text_color('primary') }} modal-trigger">
                                 <b>{{ post.title }}</b><br>
                                 {{ post.body }}<br>
                                 By: {{ post.owner_name }}<br>
@@ -79,8 +79,9 @@
         </div>
 
         <div id="view-post-modal" class="modal">
-            <h4 id="view-post-text">Loading...</h4>
-            <div id="view-post-body"></div>
+            <div class="modal-content" id="view-post-modal-content">
+
+            </div>
         </div>
     </div>
 {% endblock %}
