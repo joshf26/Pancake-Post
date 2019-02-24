@@ -54,8 +54,13 @@ def forum():
 
 @app.route('/post', methods=['POST'])
 def post():
-    if 'title' in request.form and request.form['title'] and 'content' in request.form:
-        pass
+    if 'title' in request.form and request.form['title'] and 'body' in request.form:
+        database.add_post(session['username'], request.form['title'], request.form['body'],
+                          None, 'allforum.com')
+    else:
+        flash('Error Posting')
+
+    return redirect(url_for('index'))
 
 
 @socket.on('chat')
