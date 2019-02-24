@@ -1,11 +1,13 @@
-document.addEventListener("click", function(e) {
-  if (!e.target.classList.contains("page-choice")) {
-    return;
-  }
+function logTabs(tabs) {
+	alert("HI I AM HERE")
+	let tab = tabs[0]; // Safe to assume there will only be one result
+	// alert(tab.url);
+	document.getElementById('test').innerHTML = tab.url;
+}
 
-  var chosenPage = "https://" + e.target.textContent;
-  browser.tabs.create({
-    url: chosenPage
-  });
+function onError(err){
+	console.error(err);
+	alert(err);
+}
 
-});
+browser.tabs.query({currentWindow: true, active: true}).then(logTabs, onError);
