@@ -1,8 +1,7 @@
-from flask import Flask, session, request, render_template, redirect, url_for
+from flask import Flask, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 from database import Database
-from helper import log
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -29,8 +28,9 @@ def index():
 def create():
     if request.method == 'POST':
         if 'username' in request.form and request.form['username'] and \
-           'password' in request.form and request.form['password']:
-            database.create_user(request.form['username'], request.form['password'])
+                'password' in request.form and request.form['password']:
+            #database.create_user(request.form['username'], request.form['password'])
+            pass
         flash('Account Created')
         return redirect(url_for('index'))
     return render_template('create.html')
@@ -47,6 +47,7 @@ def post():
     if 'title' in request.form and request.form['title'] and 'content' in request.form:
         pass
 
+
 # @socketio.on('message')
 # def handle_message(message):
 #     send(message, namespace='/chat')
@@ -58,6 +59,7 @@ def text(message):
     # room = session.get('room')
     print(message['msg'])
     socket.emit('message', {'msg': message['msg']})
+
 
 if __name__ == '__main__':
     socket.run(app, host='0.0.0.0', port=80, debug=True)
