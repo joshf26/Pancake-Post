@@ -1,12 +1,13 @@
 from flask import Flask, session, request, render_template, redirect, url_for
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, emit, join_room, leave_room
 
 from database import Database
-from helper import Post
+from helper import Post, log
 
 app = Flask(__name__)
 app.secret_key = 'dev'
 socket = SocketIO(app)
+socket.init_app(app)
 
 database = Database()
 
@@ -36,6 +37,17 @@ def post():
         # post = Post(request.form['title'])
         pass
 
+# @socketio.on('message')
+# def handle_message(message):
+#     send(message, namespace='/chat')
+
+@socket.on('message')
+def text(message):
+    """Sent by a client when the user entered a new message.
+    The message is sent to all people in the room."""
+    # room = session.get('room')
+    print(message['msg'])
+    socket.emit('message', {'msg': message['msg']})
 
 if __name__ == '__main__':
     socket.run(app, host='0.0.0.0', port=80, debug=True)
