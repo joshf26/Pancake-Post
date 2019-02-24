@@ -63,6 +63,7 @@ def post():
 
     return redirect(url_for('index'))
 
+
 @socket.on('chat')
 def text(chat):
     if 'msg' in chat and chat['msg']:
