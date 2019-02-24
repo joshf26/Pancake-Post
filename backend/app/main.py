@@ -65,10 +65,11 @@ def post():
 
 @socket.on('chat')
 def text(chat):
-    socket.emit('chat', {
-        'msg': escape(chat['msg']),
-        'from': escape(session['username'])
-    })
+    if 'msg' in chat and chat['msg']:
+        socket.emit('chat', {
+            'msg': escape(chat['msg']),
+            'from': escape(session['username'])
+        })
 
 
 if __name__ == '__main__':
