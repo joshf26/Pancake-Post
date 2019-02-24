@@ -1,0 +1,16 @@
+{
+
+  "description": "Demonstrating toolbar buttons",
+  "manifest_version": 2,
+  "name": "button-demo",
+  "version": "1.0",
+  "author":"Tiffany Phan",
+  
+ "browser_action": {
+    "browser_style": true,
+    "default_popup": "popup_box/popup_box.html",
+    "default_icon": {
+      "32": "icons/tab-icon.png"
+    }
+  }
+}
