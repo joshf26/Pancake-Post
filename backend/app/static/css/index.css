@@ -29,7 +29,7 @@
 
 #chat {
     box-sizing: border-box;
-    border: 5px solid #546e7a;
+    border-left: 10px solid #546e7a;
 }
 
 #chat-input-field {
@@ -43,5 +43,5 @@
 #forum {
     flex: 0 0 60%;
     box-sizing: border-box;
-    border: 5px solid #546e7a;
+    /*border: 10px solid #546e7a;*/
 }

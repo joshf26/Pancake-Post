@@ -28,7 +28,8 @@ def index():
 
     if 'username' in session:
         posts = database.get_posts(DEFAULT_DOMAIN, 10, Orders.VOTES)
-        return render_template('index.html', username=session['username'], posts=posts)
+        return render_template('index.html', username=session['username'],
+                               posts=posts, domain=session.get('domain', DEFAULT_DOMAIN))
 
     return render_template('landing.html')
 

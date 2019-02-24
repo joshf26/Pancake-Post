@@ -7,6 +7,7 @@
 {% block body %}
     <div id="page">
         <nav id="header" class="center {{ color('primary') }}">
+            <span>Domain: {{ domain }}</span>
             <h3>Hello {{ username }}</h3>
             <a href="{{ url_for('change') }}" class="btn {{ color('secondary') }} {{ text_color('primary') }}">Logout</a>
             <a href="#new-post-modal" class="btn {{ color('secondary') }} {{ text_color('primary') }} waves-effect modal-trigger">New Post</a>
