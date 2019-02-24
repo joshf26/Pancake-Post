@@ -4,6 +4,7 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 from conf import *
 from helper import log
+from auth import generate_hash
 
 
 class Database:
@@ -39,3 +40,8 @@ class Database:
             self.cursor.execute("CREATE TABLE posts")
 
         log(f'Database initialized! Name: {DATABASE_NAME}')
+
+    def create_user(self, username, password):
+        pw_hash, salt = generate_hash(password)
+
+
