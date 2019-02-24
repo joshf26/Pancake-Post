@@ -278,4 +278,3 @@ class Database:
 
         if username:
             return username[0]
-
