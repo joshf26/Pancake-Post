@@ -68,16 +68,27 @@ class Database:
 
     def create_user(self, username, password):
         pw_hash, salt = generate_hash(password)
+        # TODO: We need to check that the user doesn't exist already before adding them.
         self.cursor.execute("INSERT INTO users(username, hash, salt) "
                             "VALUES (%s, %s, %s)", (username, pw_hash, salt))
 
-    def add_comment(self, post_name, body, parent_id, user_id, domain):
+    def check_user(self, username, password):
+        self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
+        pw_hash, salt = self.cursor.fetchone()
+        # TODO: Finish this
+
+    def add_post(self, post_name, body, parent_id, user_id, domain):
         if parent_id == -1:
             parent_id = None
         self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
                             "VALUES (%s, %s, %s, %s, %s)",
                             (user_id, post_name, body, parent_id, domain))
 
-    def delete_comment(self, post_id):
+    def delete_post(self, post_id):
         self.cursor.execute("DELETE FROM posts WHERE ID=%s", (post_id))
 
+    def add_vote(self):
+        pass # TODO: Finish this
+
+    def delete_vote(self):
+        pass # TODO: Finish this
