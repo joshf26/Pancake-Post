@@ -21,8 +21,14 @@
                                 <b>{{ post.title }}</b><br>
                                 {{ post.body }}<br>
                                 By: {{ post.owner_name }}<br>
-                                Created: {{ post.created_at.strftime('%x %X') }}
+                                Created: <span id="created-at-{{ loop.index }}"></span>
                             </a>
+                            <script>
+                                let time = '{{ post.created_at.strftime('%x %X') }}';
+                                let offset = new Date().getTimezoneOffset();
+                                let client_time = time + offset;
+                                document.getElementById('created-at-{{ loop.index }}').value = client_time`;
+                            </script>
                         {% endfor %}
                     {% else %}
                         <div class="center vertical-center {{ text_color('primary') }}">
