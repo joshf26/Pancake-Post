@@ -7,6 +7,11 @@ from helper import log
 from auth import generate_hash, check_password
 
 
+class Orders:
+    VOTES = ''
+    RECENT = ''
+
+
 class Database:
 
     def __init__(self):
@@ -82,14 +87,14 @@ class Database:
     def check_user(self, username, password):
         self.cursor.execute("SELECT hash, salt FROM users WHERE username=%s", (username,))
         pw_information = self.cursor.fetchone()
+
         if pw_information:
             pw_hash, salt = pw_information
             return check_password(password, pw_hash, salt)
+
         return False
 
     def add_post(self, post_name, body, parent_id, user_id, domain):
-        if parent_id == -1:
-            parent_id = None
         self.cursor.execute("INSERT INTO posts(uid, title, body, parent, site) "
                             "VALUES (%s, %s, %s, %s, %s)",
                             (user_id, post_name, body, parent_id, domain))
@@ -103,3 +108,7 @@ class Database:
 
     def delete_vote(self, vote_id):
         self.cursor.execute("DELETE FROM votes WHERE ID=%s", vote_id)
+
+    def get_posts(self, domain, number, order):
+        # TODO: Get "number" amount of posts of domain "domain" ordered by "order".
+        pass
