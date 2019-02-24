@@ -66,10 +66,14 @@ def post():
 @socket.on('chat')
 def text(chat):
     if 'msg' in chat and chat['msg']:
+        room = session.get('domain', DEFAULT_DOMAIN)
         socket.emit('chat', {
             'msg': escape(chat['msg']),
-            'from': escape(session['username'])
-        })
+            'from': escape(session['username'])})
+        # socket.emit('chat', {
+        #     'msg': escape(chat['msg']),
+        #     'from': escape(session['username'])},
+        #     room=session['domain'])
 
 
 if __name__ == '__main__':
