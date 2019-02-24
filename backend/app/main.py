@@ -34,7 +34,6 @@ def change():
 def post():
     if 'title' in request.form and request.form['title'] and 'content' in request.form:
         # post = Post(request.form['title'])
-        pass
 
 
 if __name__ == '__main__':
