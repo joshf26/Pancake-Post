@@ -56,10 +56,3 @@ html, body {
     padding: 5px 0;
     background-color: #546e7a !important;
 }
-
-#domain-indicator {
-    position: absolute;
-    top: 0;
-    right: 25px;
-}
-
