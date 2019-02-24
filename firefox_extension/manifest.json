@@ -12,5 +12,7 @@
     "default_icon": {
       "32": "icons/tab-icon.png"
     }
-  }
+  },
+  
+  "permissions": ["activeTab", "tabs"]
 }
