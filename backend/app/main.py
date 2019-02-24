@@ -54,7 +54,8 @@ def post():
 @socket.on('message')
 def text(message):
     print(message['msg'])
-    socket.emit('message', {'msg': message['msg']})
+    socket.emit('message', {'msg': message['msg'],
+                            'from': session['username']})
 
 
 if __name__ == '__main__':
