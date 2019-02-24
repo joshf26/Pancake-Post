@@ -1,4 +1,4 @@
-from flask import Flask, session, request, render_template, redirect, url_for, flash
+from flask import Flask, escape, session, request, render_template, redirect, url_for, flash
 from flask_socketio import SocketIO, emit, join_room, leave_room
 
 from database import Database
@@ -54,9 +54,9 @@ def post():
 
 @socket.on('message')
 def text(message):
-    print(message['msg'])
-    socket.emit('message', {'msg': message['msg'],
-                            'from': session['username']})
+    socket.emit('message', {'msg': escape(message['msg']),
+                            'from': escape(session['username'])
+                            })
 
 
 if __name__ == '__main__':
