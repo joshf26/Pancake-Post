@@ -12,10 +12,10 @@ function add_question(question) {
     question_element.className = 'question';
 
     const question_text_element = document.createElement('h6');
-    question_element.innerText = question.text;
+    question_element.innerText = question['text'];
 
     const question_info_element = document.createElement('p');
-    question_info_element.innerText = `${question.createdby} | ${question.createdon}`;
+    question_info_element.innerText = format_date(question['createdon'].toDate());
 
     question_element.appendChild(question_info_element);
     question_element.appendChild(question_text_element);

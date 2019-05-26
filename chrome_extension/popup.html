@@ -9,13 +9,21 @@
     <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase.js"></script>
 </head>
 <body>
-<h1>Hello World</h1>
+<h3>Questions</h3>
 <div id="messages"></div>
 <div id="questions"></div>
 <button id="sign-out-button">Sign Out</button>
 
+
+<h3>Ask Question</h3>
+<textarea name="question" id="question" cols="30" rows="10"></textarea>
+<br>
+<button id="post-question-button">Post</button>
+
 <script src="init.js"></script>
+<script src="helper.js"></script>
 <script src="auth.js"></script>
 <script src="post.js"></script>
+<script src="sync.js"></script>
 </body>
 </html>
