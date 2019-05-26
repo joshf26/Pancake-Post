@@ -8,11 +8,13 @@ const config = {
 };
 firebase.initializeApp(config);
 
-let domain;
+const database = firebase.firestore();
 
-chrome.tabs.query({
-    active: true,
-    currentWindow: true
-}, tabs => {
-    domain = new URL(tabs[0].url);
+let hostname;
+
+get_hostname(() => {
+    do_auth(() => {
+        setup_listeners();
+    });
 });
+

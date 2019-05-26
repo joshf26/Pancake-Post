@@ -27,10 +27,11 @@ function signOut() {
     firebase.auth().signOut();
 }
 
-window.addEventListener('load', () => {
+function do_auth(callback) {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             add_message(firebase.auth().currentUser.displayName);
+            callback();
         }
         else {
             startAuth(true);
@@ -42,4 +43,4 @@ window.addEventListener('load', () => {
     }
 
     document.getElementById('sign-out-button').addEventListener('click', signOut);
-});
+}

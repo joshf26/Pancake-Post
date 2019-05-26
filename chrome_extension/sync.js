@@ -1,13 +1,25 @@
-const database = firebase.firestore();
+function post_question(question) {
+    database.collection('questions').add(question);
+}
 
-// database.collection('domains').doc('pancakepost.com').collection('questions').onSnapshot(function(doc) {
-//     console.log(doc.docs[0].data());
-// });
+function post_answer(answer) {
+    database.collection('answers').add(answer);
+}
 
-// domain.hostname
-database.collection('domains').doc('pancakepost.com').collection('questions').onSnapshot(document => {
-    document.forEach(question => {
-        console.log(question.data());
-        add_question(question.data());
+function delete_question(question) {
+    database.collection('questions').doc(question).delete();
+}
+
+function setup_listeners() {
+    database.collection('questions').where('domain', '==', hostname).onSnapshot(document => {
+        document.forEach(question => {
+            add_question(question.id, question.data());
+
+            database.collection('answers').where('question', '==', database.collection('questions').doc(question.id)).onSnapshot(document => {
+                document.forEach(answer => {
+                    add_answer(question.id, answer.id, answer.data());
+                });
+            })
+        });
     });
-});
+}
