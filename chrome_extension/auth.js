@@ -1,13 +1,3 @@
-var config = {
-    apiKey: "AIzaSyBOIvx_mOcVdCItZF1kCDXxYOu85REmZgo",
-    authDomain: "pancake-post.firebaseapp.com",
-    databaseURL: "https://pancake-post.firebaseio.com",
-    projectId: "pancake-post",
-    storageBucket: "pancake-post.appspot.com",
-    messagingSenderId: "713387718919"
-};
-firebase.initializeApp(config);
-
 function startAuth(interactive) {
     // Request an OAuth token from the Chrome Identity API.
     chrome.identity.getAuthToken({interactive: !!interactive}, function (token) {
@@ -17,7 +7,7 @@ function startAuth(interactive) {
             console.error(chrome.runtime.lastError);
         } else if (token) {
             // Authorize Firebase with the OAuth Access Token.
-            var credential = firebase.auth.GoogleAuthProvider.credential(null, token);
+            const credential = firebase.auth.GoogleAuthProvider.credential(null, token);
             firebase.auth().signInAndRetrieveDataWithCredential(credential).catch(function (error) {
                 // The OAuth token might have been invalidated. Lets' remove it from cache.
                 if (error.code === 'auth/invalid-credential') {
@@ -37,7 +27,7 @@ function signOut() {
     firebase.auth().signOut();
 }
 
-window.onload = () => {
+window.addEventListener('load', () => {
     firebase.auth().onAuthStateChanged((user) => {
         if (user) {
             add_message(firebase.auth().currentUser.displayName);
@@ -52,4 +42,4 @@ window.onload = () => {
     }
 
     document.getElementById('sign-out-button').addEventListener('click', signOut);
-};
+});

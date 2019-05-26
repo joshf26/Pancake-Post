@@ -1,0 +1,10 @@
+body {
+    width: 500px;
+    height: 500px;
+}
+
+.question {
+    border: solid black 2px;
+    padding: 5px;
+    margin: 5px;
+}
