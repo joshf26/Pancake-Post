@@ -1,18 +1,25 @@
 {
-    "name": "Pancake Post",
-    "version": "1.0",
-    "description": "Chat and forum utility for any webpage.",
-    "author": "Justin Adkins, Josh Franklin, Harsh Deshpande, Tiffany Phan",
-    "icons": {
-        "16": "pancakes.png",
-        "32": "pancakes.png",
-        "48": "pancakes.png"
-    },
-    "browser_action": {
-        "default_icon": "pancakes.png",
-        "default_popup": "popup.html"
-    },
-
-    "permissions": ["activeTab", "tabs"],
-    "manifest_version": 2
+  "manifest_version": 2,
+  "name": "Pancake Post",
+  "description": "Adds a forum to every website.",
+  "version": "1.0",
+  "icons": {
+    "128": "pancakes.png"
+  },
+  "browser_action": {
+    "default_icon": "pancakes.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "identity"
+  ],
+  "content_security_policy":"script-src 'self' https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com; object-src 'self'",
+  "oauth2": {
+    "client_id": "456627816816-hfl1kdar0dipco1u8mmgrill9ksbso8q.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/userinfo.email",
+      "https://www.googleapis.com/auth/userinfo.profile"
+    ]
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmQPS2GxNVOGKUpoCgH/0qaRPp1/O+3PXEoqQJiBi4levLHSBOX/Dy75h47iwLe7dbKbHRa1oyU+31tFFMN7c9IvtuxNYrPr45DwHUtI/BLx+T1UaK7sBI9KCC3q/nwcuL1Z8/LpOLg/WqUiJ2zWKvJcBeb1P8LYMRmv3pPNk6AiD4teoHNOxZn+rmKoDROq4B9XX0IlyT4XAmGUDKbUbxTFL/s4vIbPR4bi1P27rkDCOipIslZCGtB4LgYOybhU+l1MOYEGCZz4ak+airEVmbkD180XixQitstNTuMrLDno0t1bPWINesfX7HSEoFeDJNbpA/TCZjdiPJjONFYSTNwIDAQAB"
 }

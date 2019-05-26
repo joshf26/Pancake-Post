@@ -1,5 +1,0 @@
-Flask
-jinja2
-flask-socketio
-psycopg2-binary
-eventlet
